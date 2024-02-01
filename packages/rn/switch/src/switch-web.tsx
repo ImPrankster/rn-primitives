@@ -1,14 +1,14 @@
-import * as Switch from '@radix-ui/react-switch';
-import React from 'react';
-import { GestureResponderEvent, Pressable, View } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
+import * as Switch from "@radix-ui/react-switch";
+import React from "react";
+import { GestureResponderEvent, Pressable, View } from "react-native";
+import * as Slot from "@rn-primitives/slot";
 import type {
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '@rn-primitives/internal-types';
-import type { SwitchRootProps } from './types';
+} from "@rn-primitives/internal-types";
+import type { SwitchRootProps } from "./types";
 
 const Root = React.forwardRef<
   PressableRef,
@@ -24,7 +24,7 @@ const Root = React.forwardRef<
       onKeyDown: onKeyDownProp,
       ...props
     },
-    ref
+    ref,
   ) => {
     function onPress(ev: GestureResponderEvent) {
       onCheckedChange(!checked);
@@ -33,7 +33,7 @@ const Root = React.forwardRef<
 
     function onKeyDown(ev: React.KeyboardEvent) {
       onKeyDownProp?.(ev);
-      if (ev.key === ' ') {
+      if (ev.key === " ") {
         onCheckedChange(!checked);
       }
     }
@@ -56,10 +56,10 @@ const Root = React.forwardRef<
         />
       </Switch.Root>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootWebSwitch';
+Root.displayName = "RootWebSwitch";
 
 const Thumb = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
@@ -69,9 +69,9 @@ const Thumb = React.forwardRef<ViewRef, SlottableViewProps>(
         <Component ref={ref} {...props} />
       </Switch.Thumb>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootWebSwitch';
+Root.displayName = "RootWebSwitch";
 
 export { Root, Thumb };

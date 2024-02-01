@@ -1,18 +1,18 @@
-import React from 'react';
-import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
+import React from "react";
+import { Pressable, View, type GestureResponderEvent } from "react-native";
+import * as Slot from "@rn-primitives/slot";
 import type {
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '@rn-primitives/internal-types';
+} from "@rn-primitives/internal-types";
 import type {
   AccordionContentProps,
   AccordionContext,
   AccordionItemProps,
   AccordionRootProps,
-} from './types';
+} from "./types";
 
 const AccordionContext = React.createContext<AccordionContext | null>(null);
 
@@ -27,7 +27,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
       onValueChange,
       ...viewProps
     },
-    ref
+    ref,
   ) => {
     const Component = asChild ? Slot.View : View;
 
@@ -46,16 +46,16 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
         <Component ref={ref} {...viewProps} />
       </AccordionContext.Provider>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootNativeAccordion';
+Root.displayName = "RootNativeAccordion";
 
 function useAccordionContext() {
   const context = React.useContext(AccordionContext);
   if (!context) {
     throw new Error(
-      'Accordion compound components cannot be rendered outside the Accordion component'
+      "Accordion compound components cannot be rendered outside the Accordion component",
     );
   }
   return context;
@@ -67,7 +67,7 @@ type AccordionItemContext = AccordionItemProps & {
 };
 
 const AccordionItemContext = React.createContext<AccordionItemContext | null>(
-  null
+  null,
 );
 
 const Item = React.forwardRef<ViewRef, SlottableViewProps & AccordionItemProps>(
@@ -88,16 +88,16 @@ const Item = React.forwardRef<ViewRef, SlottableViewProps & AccordionItemProps>(
         <Component ref={ref} {...viewProps} />
       </AccordionItemContext.Provider>
     );
-  }
+  },
 );
 
-Item.displayName = 'ItemNativeAccordion';
+Item.displayName = "ItemNativeAccordion";
 
 function useAccordionItemContext() {
   const context = React.useContext(AccordionItemContext);
   if (!context) {
     throw new Error(
-      'AccordionItem compound components cannot be rendered outside the AccordionItem component'
+      "AccordionItem compound components cannot be rendered outside the AccordionItem component",
     );
   }
   return context;
@@ -112,21 +112,21 @@ const Header = React.forwardRef<ViewRef, SlottableViewProps>(
     return (
       <Component
         ref={ref}
-        role='heading'
+        role="heading"
         aria-expanded={isExpanded}
         aria-disabled={rootDisabled ?? itemDisabled}
         {...props}
       />
     );
-  }
+  },
 );
 
-Header.displayName = 'HeaderNativeAccordion';
+Header.displayName = "HeaderNativeAccordion";
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   (
     { asChild, onPress: onPressProp, disabled: disabledProp, ...props },
-    ref
+    ref,
   ) => {
     const {
       disabled: rootDisabled,
@@ -144,7 +144,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
 
     function onPress(ev: GestureResponderEvent) {
       if (rootDisabled || itemDisabled) return;
-      if (type === 'single') {
+      if (type === "single") {
         const newValue = collapsible
           ? value === rootValue
             ? undefined
@@ -152,7 +152,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
           : value;
         onValueChange(newValue);
       }
-      if (type === 'multiple') {
+      if (type === "multiple") {
         const rootToArray = toStringArray(rootValue);
         const newValue = collapsible
           ? rootToArray.includes(value)
@@ -170,11 +170,11 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       <Component
         ref={ref}
         key={`${nativeID}-${JSON.stringify(
-          rootValue
+          rootValue,
         )}-${isDisabled}-${collapsible}-${type}`}
         nativeID={nativeID}
         aria-disabled={isDisabled}
-        role='button'
+        role="button"
         onPress={onPress}
         accessibilityState={{
           expanded: isExpanded,
@@ -184,10 +184,10 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
-Trigger.displayName = 'TriggerNativeAccordion';
+Trigger.displayName = "TriggerNativeAccordion";
 
 const Content = React.forwardRef<
   ViewRef,
@@ -208,13 +208,13 @@ const Content = React.forwardRef<
       ref={ref}
       aria-hidden={!(forceMount || isExpanded)}
       aria-labelledby={nativeID}
-      role={type === 'single' ? 'region' : 'summary'}
+      role={type === "single" ? "region" : "summary"}
       {...props}
     />
   );
 });
 
-Content.displayName = 'ContentNativeAccordion';
+Content.displayName = "ContentNativeAccordion";
 
 export {
   Content,
@@ -232,7 +232,7 @@ function toStringArray(value?: string | string[]) {
 
 function isItemExpanded(
   rootValue: string | string[] | undefined,
-  value: string
+  value: string,
 ) {
   return Array.isArray(rootValue)
     ? rootValue.includes(value)

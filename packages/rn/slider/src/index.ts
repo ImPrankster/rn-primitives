@@ -1,7 +1,7 @@
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
 
-import * as SliderNative from './slider-native';
-import * as SliderWeb from './slider-web';
+import * as SliderNative from "./slider-native";
+import * as SliderWeb from "./slider-web";
 
 export const Root = Platform.select({
   web: SliderWeb.Root,

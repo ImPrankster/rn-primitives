@@ -1,9 +1,12 @@
-import * as Progress from '@radix-ui/react-progress';
-import React from 'react';
-import { View } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
-import type { SlottableViewProps, ViewRef } from '@rn-primitives/internal-types';
-import type { ProgressRootProps } from './types';
+import * as Progress from "@radix-ui/react-progress";
+import React from "react";
+import { View } from "react-native";
+import * as Slot from "@rn-primitives/slot";
+import type {
+  SlottableViewProps,
+  ViewRef,
+} from "@rn-primitives/internal-types";
+import type { ProgressRootProps } from "./types";
 
 const ProgressContext = React.createContext<ProgressRootProps | null>(null);
 
@@ -22,10 +25,10 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & ProgressRootProps>(
         </Progress.Root>
       </ProgressContext.Provider>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootProgress';
+Root.displayName = "RootProgress";
 
 const Indicator = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
@@ -35,9 +38,9 @@ const Indicator = React.forwardRef<ViewRef, SlottableViewProps>(
         <Component ref={ref} {...props} />
       </Progress.Indicator>
     );
-  }
+  },
 );
 
-Indicator.displayName = 'IndicatorProgress';
+Indicator.displayName = "IndicatorProgress";
 
 export { Indicator, Root };

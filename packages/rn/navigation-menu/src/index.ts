@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import * as NavigationMenuWeb from './navigation-menu-web';
-import * as NavigationMenuNative from './navigation-menu-native';
+import { Platform } from "react-native";
+import * as NavigationMenuWeb from "./navigation-menu-web";
+import * as NavigationMenuNative from "./navigation-menu-native";
 
 export const Root = Platform.select({
   web: NavigationMenuWeb.Root,

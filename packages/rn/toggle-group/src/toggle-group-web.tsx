@@ -1,18 +1,18 @@
-import * as ToggleGroup from '@radix-ui/react-toggle-group';
-import React from 'react';
-import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
+import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import React from "react";
+import { Pressable, View, type GestureResponderEvent } from "react-native";
+import * as Slot from "@rn-primitives/slot";
 import type {
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '@rn-primitives/internal-types';
-import * as ToggleGroupUtils from '@rn-primitives/toggle-group-utils';
-import type { ToggleGroupItemProps, ToggleGroupRootProps } from './types';
+} from "@rn-primitives/internal-types";
+import * as ToggleGroupUtils from "@rn-primitives/toggle-group-utils";
+import type { ToggleGroupItemProps, ToggleGroupRootProps } from "./types";
 
 const ToggleGroupContext = React.createContext<ToggleGroupRootProps | null>(
-  null
+  null,
 );
 
 const Root = React.forwardRef<
@@ -32,7 +32,7 @@ const Root = React.forwardRef<
       loop,
       ...viewProps
     },
-    ref
+    ref,
   ) => {
     const Component = asChild ? Slot.View : View;
     return (
@@ -61,16 +61,16 @@ const Root = React.forwardRef<
         </ToggleGroup.Root>
       </ToggleGroupContext.Provider>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootToggleGroup';
+Root.displayName = "RootToggleGroup";
 
 function useToggleGroupContext() {
   const context = React.useContext(ToggleGroupContext);
   if (!context) {
     throw new Error(
-      'ToggleGroup compound components cannot be rendered outside the ToggleGroup component'
+      "ToggleGroup compound components cannot be rendered outside the ToggleGroup component",
     );
   }
   return context;
@@ -90,16 +90,16 @@ const Item = React.forwardRef<
       onPress: onPressProp,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { type, disabled, value, onValueChange } = useToggleGroupContext();
 
     function onPress(ev: GestureResponderEvent) {
       onPressProp?.(ev);
-      if (type === 'single') {
+      if (type === "single") {
         onValueChange(ToggleGroupUtils.getNewSingleValue(value, itemValue));
       }
-      if (type === 'multiple') {
+      if (type === "multiple") {
         onValueChange(ToggleGroupUtils.getNewMultipleValue(value, itemValue));
       }
     }
@@ -112,22 +112,22 @@ const Item = React.forwardRef<
             ref={ref}
             onPress={onPress}
             disabled={disabled || disabledProp}
-            role='button'
+            role="button"
             {...props}
           />
         </ToggleGroup.Item>
       </ItemContext.Provider>
     );
-  }
+  },
 );
 
-Item.displayName = 'ItemToggleGroup';
+Item.displayName = "ItemToggleGroup";
 
 function useItemContext() {
   const context = React.useContext(ItemContext);
   if (!context) {
     throw new Error(
-      'ToggleGroupItem compound components cannot be rendered outside the ToggleGroupItem component'
+      "ToggleGroupItem compound components cannot be rendered outside the ToggleGroupItem component",
     );
   }
   return context;

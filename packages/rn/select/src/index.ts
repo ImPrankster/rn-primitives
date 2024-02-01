@@ -1,8 +1,8 @@
-export type { Option } from './types';
-import { Platform } from 'react-native';
+export type { Option } from "./types";
+import { Platform } from "react-native";
 
-import * as SelectNative from './select-native';
-import * as SelectWeb from './select-web';
+import * as SelectNative from "./select-native";
+import * as SelectWeb from "./select-web";
 
 export const Root = Platform.select({
   web: SelectWeb.Root,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface AugmentRefProps<T> {
   ref: React.Ref<T>;
@@ -16,7 +16,7 @@ export function useAugmentedRef<T>({
   React.useImperativeHandle(
     ref,
     () => {
-      if (typeof augmentedRef === 'function' || !augmentedRef?.current) {
+      if (typeof augmentedRef === "function" || !augmentedRef?.current) {
         return {} as T;
       }
       return {
@@ -24,6 +24,6 @@ export function useAugmentedRef<T>({
         ...methods,
       };
     },
-    deps
+    deps,
   );
 }

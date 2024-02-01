@@ -1,14 +1,14 @@
-import type { GestureResponderEvent } from 'react-native';
+import type { GestureResponderEvent } from "react-native";
 
 const EmptyGestureResponderEvent: GestureResponderEvent = {
   nativeEvent: {
     changedTouches: [],
-    identifier: '0',
+    identifier: "0",
     locationX: 0,
     locationY: 0,
     pageX: 0,
     pageY: 0,
-    target: '0',
+    target: "0",
     timestamp: 0,
     touches: [],
   },
@@ -25,7 +25,7 @@ const EmptyGestureResponderEvent: GestureResponderEvent = {
   stopPropagation: () => {},
   target: 0,
   timeStamp: 0,
-  type: '',
+  type: "",
 };
 
 export { EmptyGestureResponderEvent };

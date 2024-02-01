@@ -1,18 +1,18 @@
-import * as Collapsible from '@radix-ui/react-collapsible';
-import React from 'react';
-import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import { useAugmentedRef } from '@rn-primitives/use-augmented-ref';
-import * as Slot from '@rn-primitives/slot';
+import * as Collapsible from "@radix-ui/react-collapsible";
+import React from "react";
+import { Pressable, View, type GestureResponderEvent } from "react-native";
+import { useAugmentedRef } from "@rn-primitives/use-augmented-ref";
+import * as Slot from "@rn-primitives/slot";
 import type {
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '@rn-primitives/internal-types';
-import type { CollapsibleContentProps, CollapsibleRootProps } from './types';
+} from "@rn-primitives/internal-types";
+import type { CollapsibleContentProps, CollapsibleRootProps } from "./types";
 
 const CollapsibleContext = React.createContext<CollapsibleRootProps | null>(
-  null
+  null,
 );
 
 const Root = React.forwardRef<
@@ -25,7 +25,7 @@ const Root = React.forwardRef<
   React.useLayoutEffect(() => {
     if (augmentedRef.current) {
       const augRef = augmentedRef.current as unknown as HTMLDivElement;
-      augRef.dataset.state = open ? 'open' : 'closed';
+      augRef.dataset.state = open ? "open" : "closed";
     }
   }, [open]);
 
@@ -33,7 +33,7 @@ const Root = React.forwardRef<
     if (augmentedRef.current) {
       const augRef = augmentedRef.current as unknown as HTMLDivElement;
       if (disabled) {
-        augRef.dataset.disabled = 'true';
+        augRef.dataset.disabled = "true";
       } else {
         augRef.dataset.disabled = undefined;
       }
@@ -60,13 +60,13 @@ const Root = React.forwardRef<
   );
 });
 
-Root.displayName = 'RootWebCollapsible';
+Root.displayName = "RootWebCollapsible";
 
 function useCollapsibleContext() {
   const context = React.useContext(CollapsibleContext);
   if (!context) {
     throw new Error(
-      'Collapsible compound components cannot be rendered outside the Collapsible component'
+      "Collapsible compound components cannot be rendered outside the Collapsible component",
     );
   }
   return context;
@@ -75,7 +75,7 @@ function useCollapsibleContext() {
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   (
     { asChild, onPress: onPressProp, disabled: disabledProp = false, ...props },
-    ref
+    ref,
   ) => {
     const { disabled, open, onOpenChange } = useCollapsibleContext();
 
@@ -85,17 +85,17 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
-        augRef.dataset.state = open ? 'open' : 'closed';
+        augRef.dataset.state = open ? "open" : "closed";
       }
     }, [open]);
 
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
-        augRef.type = 'button';
+        augRef.type = "button";
 
         if (disabled) {
-          augRef.dataset.disabled = 'true';
+          augRef.dataset.disabled = "true";
         } else {
           augRef.dataset.disabled = undefined;
         }
@@ -112,17 +112,17 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       <Collapsible.Trigger disabled={disabled} asChild>
         <Component
           ref={augmentedRef}
-          role='button'
+          role="button"
           onPress={onPress}
           disabled={disabled}
           {...props}
         />
       </Collapsible.Trigger>
     );
-  }
+  },
 );
 
-Trigger.displayName = 'TriggerWebCollapsible';
+Trigger.displayName = "TriggerWebCollapsible";
 
 const Content = React.forwardRef<
   ViewRef,
@@ -135,7 +135,7 @@ const Content = React.forwardRef<
   React.useLayoutEffect(() => {
     if (augmentedRef.current) {
       const augRef = augmentedRef.current as unknown as HTMLDivElement;
-      augRef.dataset.state = open ? 'open' : 'closed';
+      augRef.dataset.state = open ? "open" : "closed";
     }
   }, [open]);
 
@@ -147,6 +147,6 @@ const Content = React.forwardRef<
   );
 });
 
-Content.displayName = 'ContentWebCollapsible';
+Content.displayName = "ContentWebCollapsible";
 
 export { Content, Root, Trigger };

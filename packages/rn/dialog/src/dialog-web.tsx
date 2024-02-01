@@ -1,13 +1,13 @@
-import * as Dialog from '@radix-ui/react-dialog';
-import React from 'react';
+import * as Dialog from "@radix-ui/react-dialog";
+import React from "react";
 import {
   Pressable,
   Text,
   View,
   type GestureResponderEvent,
-} from 'react-native';
-import { useAugmentedRef } from '@rn-primitives/use-augmented-ref';
-import * as Slot from '@rn-primitives/slot';
+} from "react-native";
+import { useAugmentedRef } from "@rn-primitives/use-augmented-ref";
+import * as Slot from "@rn-primitives/slot";
 import type {
   PressableRef,
   SlottablePressableProps,
@@ -15,13 +15,13 @@ import type {
   SlottableViewProps,
   TextRef,
   ViewRef,
-} from '@rn-primitives/internal-types';
+} from "@rn-primitives/internal-types";
 import type {
   DialogContentProps,
   DialogOverlayProps,
   DialogPortalProps,
   DialogRootProps,
-} from './types';
+} from "./types";
 
 const DialogContext = React.createContext<DialogRootProps | null>(null);
 
@@ -35,16 +35,16 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & DialogRootProps>(
         </Dialog.Root>
       </DialogContext.Provider>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootWebDialog';
+Root.displayName = "RootWebDialog";
 
 function useDialogContext() {
   const context = React.useContext(DialogContext);
   if (!context) {
     throw new Error(
-      'Dialog compound components cannot be rendered outside the Dialog component'
+      "Dialog compound components cannot be rendered outside the Dialog component",
     );
   }
   return context;
@@ -65,8 +65,8 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
-        augRef.dataset.state = open ? 'open' : 'closed';
-        augRef.type = 'button';
+        augRef.dataset.state = open ? "open" : "closed";
+        augRef.type = "button";
       }
     }, [open]);
 
@@ -76,16 +76,16 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         <Component
           ref={augmentedRef}
           onPress={onPress}
-          role='button'
+          role="button"
           disabled={disabled}
           {...props}
         />
       </Dialog.Trigger>
     );
-  }
+  },
 );
 
-Trigger.displayName = 'TriggerWebDialog';
+Trigger.displayName = "TriggerWebDialog";
 
 function Portal({ forceMount, container, children }: DialogPortalProps) {
   return (
@@ -109,7 +109,7 @@ const Overlay = React.forwardRef<
   );
 });
 
-Overlay.displayName = 'OverlayWebDialog';
+Overlay.displayName = "OverlayWebDialog";
 
 const Content = React.forwardRef<
   ViewRef,
@@ -126,7 +126,7 @@ const Content = React.forwardRef<
       onPointerDownOutside,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Component = asChild ? Slot.View : View;
     return (
@@ -141,10 +141,10 @@ const Content = React.forwardRef<
         <Component ref={ref} {...props} />
       </Dialog.Content>
     );
-  }
+  },
 );
 
-Content.displayName = 'ContentWebDialog';
+Content.displayName = "ContentWebDialog";
 
 const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
@@ -162,7 +162,7 @@ const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
-        augRef.type = 'button';
+        augRef.type = "button";
       }
     }, []);
 
@@ -173,17 +173,17 @@ const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
           <Component
             ref={augmentedRef}
             onPress={onPress}
-            role='button'
+            role="button"
             disabled={disabled}
             {...props}
           />
         </Dialog.Close>
       </>
     );
-  }
+  },
 );
 
-Close.displayName = 'CloseWebDialog';
+Close.displayName = "CloseWebDialog";
 
 const Title = React.forwardRef<TextRef, SlottableTextProps>(
   ({ asChild, ...props }, ref) => {
@@ -193,10 +193,10 @@ const Title = React.forwardRef<TextRef, SlottableTextProps>(
         <Component ref={ref} {...props} />
       </Dialog.Title>
     );
-  }
+  },
 );
 
-Title.displayName = 'TitleWebDialog';
+Title.displayName = "TitleWebDialog";
 
 const Description = React.forwardRef<TextRef, SlottableTextProps>(
   ({ asChild, ...props }, ref) => {
@@ -206,10 +206,10 @@ const Description = React.forwardRef<TextRef, SlottableTextProps>(
         <Component ref={ref} {...props} />
       </Dialog.Description>
     );
-  }
+  },
 );
 
-Description.displayName = 'DescriptionWebDialog';
+Description.displayName = "DescriptionWebDialog";
 
 export {
   Close,

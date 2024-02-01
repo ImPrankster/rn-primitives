@@ -1,13 +1,13 @@
-import * as AlertDialog from '@radix-ui/react-alert-dialog';
-import React from 'react';
+import * as AlertDialog from "@radix-ui/react-alert-dialog";
+import React from "react";
 import {
   Pressable,
   Text,
   View,
   type GestureResponderEvent,
-} from 'react-native';
-import { useAugmentedRef } from '@rn-primitives/use-augmented-ref';
-import * as Slot from '@rn-primitives/slot';
+} from "react-native";
+import { useAugmentedRef } from "@rn-primitives/use-augmented-ref";
+import * as Slot from "@rn-primitives/slot";
 import type {
   PressableRef,
   SlottablePressableProps,
@@ -15,16 +15,16 @@ import type {
   SlottableViewProps,
   TextRef,
   ViewRef,
-} from '@rn-primitives/internal-types';
+} from "@rn-primitives/internal-types";
 import type {
   AlertDialogContentProps,
   AlertDialogOverlayProps,
   AlertDialogPortalProps,
   AlertDialogRootProps,
-} from './types';
+} from "./types";
 
 const AlertDialogContext = React.createContext<AlertDialogRootProps | null>(
-  null
+  null,
 );
 
 const Root = React.forwardRef<
@@ -41,13 +41,13 @@ const Root = React.forwardRef<
   );
 });
 
-Root.displayName = 'RootAlertWebDialog';
+Root.displayName = "RootAlertWebDialog";
 
 function useAlertDialogContext() {
   const context = React.useContext(AlertDialogContext);
   if (!context) {
     throw new Error(
-      'AlertDialog compound components cannot be rendered outside the AlertDialog component'
+      "AlertDialog compound components cannot be rendered outside the AlertDialog component",
     );
   }
   return context;
@@ -68,8 +68,8 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
-        augRef.dataset.state = open ? 'open' : 'closed';
-        augRef.type = 'button';
+        augRef.dataset.state = open ? "open" : "closed";
+        augRef.type = "button";
       }
     }, [open]);
 
@@ -79,16 +79,16 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         <Component
           ref={augmentedRef}
           onPress={onPress}
-          role='button'
+          role="button"
           disabled={disabled}
           {...props}
         />
       </AlertDialog.Trigger>
     );
-  }
+  },
 );
 
-Trigger.displayName = 'TriggerAlertWebDialog';
+Trigger.displayName = "TriggerAlertWebDialog";
 
 function Portal({ forceMount, container, children }: AlertDialogPortalProps) {
   return (
@@ -112,7 +112,7 @@ const Overlay = React.forwardRef<
   );
 });
 
-Overlay.displayName = 'OverlayAlertWebDialog';
+Overlay.displayName = "OverlayAlertWebDialog";
 
 const Content = React.forwardRef<
   ViewRef,
@@ -128,7 +128,7 @@ const Content = React.forwardRef<
       onEscapeKeyDown,
       ...props
     },
-    ref
+    ref,
   ) => {
     const augmentedRef = React.useRef<ViewRef>(null);
     useAugmentedRef({ augmentedRef, ref });
@@ -137,7 +137,7 @@ const Content = React.forwardRef<
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
-        augRef.dataset.state = open ? 'open' : 'closed';
+        augRef.dataset.state = open ? "open" : "closed";
       }
     }, [open]);
 
@@ -153,10 +153,10 @@ const Content = React.forwardRef<
         <Component ref={augmentedRef} {...props} />
       </AlertDialog.Content>
     );
-  }
+  },
 );
 
-Content.displayName = 'ContentAlertWebDialog';
+Content.displayName = "ContentAlertWebDialog";
 
 const Cancel = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
@@ -174,7 +174,7 @@ const Cancel = React.forwardRef<PressableRef, SlottablePressableProps>(
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
-        augRef.type = 'button';
+        augRef.type = "button";
       }
     }, []);
 
@@ -185,17 +185,17 @@ const Cancel = React.forwardRef<PressableRef, SlottablePressableProps>(
           <Component
             ref={augmentedRef}
             onPress={onPress}
-            role='button'
+            role="button"
             disabled={disabled}
             {...props}
           />
         </AlertDialog.Cancel>
       </>
     );
-  }
+  },
 );
 
-Cancel.displayName = 'CancelAlertWebDialog';
+Cancel.displayName = "CancelAlertWebDialog";
 
 const Action = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
@@ -213,7 +213,7 @@ const Action = React.forwardRef<PressableRef, SlottablePressableProps>(
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
-        augRef.type = 'button';
+        augRef.type = "button";
       }
     }, []);
 
@@ -224,17 +224,17 @@ const Action = React.forwardRef<PressableRef, SlottablePressableProps>(
           <Component
             ref={augmentedRef}
             onPress={onPress}
-            role='button'
+            role="button"
             disabled={disabled}
             {...props}
           />
         </AlertDialog.Action>
       </>
     );
-  }
+  },
 );
 
-Action.displayName = 'ActionAlertWebDialog';
+Action.displayName = "ActionAlertWebDialog";
 
 const Title = React.forwardRef<TextRef, SlottableTextProps>(
   ({ asChild, ...props }, ref) => {
@@ -244,10 +244,10 @@ const Title = React.forwardRef<TextRef, SlottableTextProps>(
         <Component ref={ref} {...props} />
       </AlertDialog.Title>
     );
-  }
+  },
 );
 
-Title.displayName = 'TitleAlertWebDialog';
+Title.displayName = "TitleAlertWebDialog";
 
 const Description = React.forwardRef<TextRef, SlottableTextProps>(
   ({ asChild, ...props }, ref) => {
@@ -257,10 +257,10 @@ const Description = React.forwardRef<TextRef, SlottableTextProps>(
         <Component ref={ref} {...props} />
       </AlertDialog.Description>
     );
-  }
+  },
 );
 
-Description.displayName = 'DescriptionAlertWebDialog';
+Description.displayName = "DescriptionAlertWebDialog";
 
 export {
   Action,

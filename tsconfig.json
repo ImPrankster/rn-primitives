@@ -3,7 +3,7 @@
   "compilerOptions": {
     "paths": {
       "@rn-primitives/toggle-group-utils": [
-        "./packages/core/toggle-group-utils/src"
+        "./packages/core/toggle-group-utils/src",
       ],
       "@rn-primitives/accordion": ["./packages/rn/accordion/src"],
       "@rn-primitives/alert-dialog": ["./packages/rn/alert-dialog/src"],
@@ -15,7 +15,7 @@
       "@rn-primitives/dialog": ["./packages/rn/dialog/src"],
       "@rn-primitives/dropdown-menu": ["./packages/rn/dropdown-menu/src"],
       "@rn-primitives/empty-gesture-recognizer-event": [
-        "./packages/rn/empty-gesture-recognizer-event/src"
+        "./packages/rn/empty-gesture-recognizer-event/src",
       ],
       "@rn-primitives/hover-card": ["./packages/rn/hover-card/src"],
       "@rn-primitives/internal-types": ["./packages/rn/internal-types/src"],
@@ -40,11 +40,11 @@
       "@rn-primitives/toolbar": ["./packages/rn/toolbar/src"],
       "@rn-primitives/tooltip": ["./packages/rn/tooltip/src"],
       "@rn-primitives/use-augmented-ref": [
-        "./packages/rn/use-augmented-ref/src"
+        "./packages/rn/use-augmented-ref/src",
       ],
       "@rn-primitives/use-relative-position": [
-        "./packages/rn/use-relative-position/src"
-      ]
-    }
-  }
+        "./packages/rn/use-relative-position/src",
+      ],
+    },
+  },
 }

@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import * as TooltipWeb from './tooltip-web';
-import * as TooltipNative from './tooltip-native';
+import { Platform } from "react-native";
+import * as TooltipWeb from "./tooltip-web";
+import * as TooltipNative from "./tooltip-native";
 
 export const Root = Platform.select({
   web: TooltipWeb.Root,

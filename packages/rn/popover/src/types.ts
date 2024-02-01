@@ -1,4 +1,4 @@
-import type { ForceMountable } from '@rn-primitives/internal-types';
+import type { ForceMountable } from "@rn-primitives/internal-types";
 
 interface PopoverRootProps {
   open: boolean;

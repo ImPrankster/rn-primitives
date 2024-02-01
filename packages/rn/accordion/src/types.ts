@@ -1,13 +1,13 @@
-import { ForceMountable } from '@rn-primitives/internal-types';
+import { ForceMountable } from "@rn-primitives/internal-types";
 
 type SingleRootProps = {
-  type: 'single';
+  type: "single";
   value: string | undefined;
   onValueChange: (value: string | undefined) => void;
 };
 
 type MultipleRootProps = {
-  type: 'multiple';
+  type: "multiple";
   value: string[];
   onValueChange: (value: string[]) => void;
 };
@@ -21,11 +21,11 @@ type AccordionRootProps = AccordionContext & {
   /**
    * Platform: WEB ONLY
    */
-  dir?: 'ltr' | 'rtl';
+  dir?: "ltr" | "rtl";
   /**
    * Platform: WEB ONLY
    */
-  orientation?: 'vertical' | 'horizontal';
+  orientation?: "vertical" | "horizontal";
 };
 
 interface AccordionItemProps {

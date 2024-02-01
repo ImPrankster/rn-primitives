@@ -1,8 +1,11 @@
-import React from 'react';
-import { Pressable, type GestureResponderEvent } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
-import type { PressableRef, SlottablePressableProps } from '@rn-primitives/internal-types';
-import type { ToggleRootProps } from './types';
+import React from "react";
+import { Pressable, type GestureResponderEvent } from "react-native";
+import * as Slot from "@rn-primitives/slot";
+import type {
+  PressableRef,
+  SlottablePressableProps,
+} from "@rn-primitives/internal-types";
+import type { ToggleRootProps } from "./types";
 
 const Root = React.forwardRef<
   PressableRef,
@@ -17,7 +20,7 @@ const Root = React.forwardRef<
       onPress: onPressProp,
       ...props
     },
-    ref
+    ref,
   ) => {
     function onPress(ev: GestureResponderEvent) {
       if (disabled) return;
@@ -31,7 +34,7 @@ const Root = React.forwardRef<
       <Component
         ref={ref}
         aria-disabled={disabled}
-        role='switch'
+        role="switch"
         aria-selected={pressed}
         onPress={onPress}
         accessibilityState={{
@@ -42,9 +45,9 @@ const Root = React.forwardRef<
         {...props}
       />
     );
-  }
+  },
 );
 
-Root.displayName = 'RootNativeToggle';
+Root.displayName = "RootNativeToggle";
 
 export { Root };

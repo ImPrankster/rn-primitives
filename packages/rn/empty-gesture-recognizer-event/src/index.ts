@@ -1,1 +1,1 @@
-export { EmptyGestureResponderEvent } from './empty-gesture-recognizer-event';
+export { EmptyGestureResponderEvent } from "./empty-gesture-recognizer-event";

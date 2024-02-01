@@ -1,4 +1,4 @@
-import * as Popover from '@rn-primitives/popover';
+import * as Popover from "@rn-primitives/popover";
 
 const Root = Popover.Root;
 const Trigger = Popover.Trigger;

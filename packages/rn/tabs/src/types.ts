@@ -1,4 +1,4 @@
-import { ForceMountable } from '@rn-primitives/internal-types';
+import { ForceMountable } from "@rn-primitives/internal-types";
 
 interface TabsRootProps {
   value: string;
@@ -6,15 +6,15 @@ interface TabsRootProps {
   /**
    * Platform: WEB ONLY
    */
-  orientation?: 'horizontal' | 'vertical';
+  orientation?: "horizontal" | "vertical";
   /**
    * Platform: WEB ONLY
    */
-  dir?: 'ltr' | 'rtl';
+  dir?: "ltr" | "rtl";
   /**
    * Platform: WEB ONLY
    */
-  activationMode?: 'automatic' | 'manual';
+  activationMode?: "automatic" | "manual";
 }
 
 interface TabsContentProps extends ForceMountable {

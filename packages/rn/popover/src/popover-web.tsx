@@ -1,20 +1,20 @@
-import * as Popover from '@radix-ui/react-popover';
-import React from 'react';
-import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import { useAugmentedRef } from '@rn-primitives/use-augmented-ref';
-import * as Slot from '@rn-primitives/slot';
+import * as Popover from "@radix-ui/react-popover";
+import React from "react";
+import { Pressable, View, type GestureResponderEvent } from "react-native";
+import { useAugmentedRef } from "@rn-primitives/use-augmented-ref";
+import * as Slot from "@rn-primitives/slot";
 import type {
   PositionedContentProps,
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '@rn-primitives/internal-types';
+} from "@rn-primitives/internal-types";
 import type {
   PopoverOverlayProps,
   PopoverPortalProps,
   PopoverRootProps,
-} from './types';
+} from "./types";
 
 const RootContext = React.createContext<PopoverRootProps | null>(null);
 
@@ -28,16 +28,16 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & PopoverRootProps>(
         </Popover.Root>
       </RootContext.Provider>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootWebPopover';
+Root.displayName = "RootWebPopover";
 
 function usePopoverContext() {
   const context = React.useContext(RootContext);
   if (!context) {
     throw new Error(
-      'Popover compound components cannot be rendered outside the Popover component'
+      "Popover compound components cannot be rendered outside the Popover component",
     );
   }
   return context;
@@ -58,8 +58,8 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
-        augRef.dataset.state = open ? 'open' : 'closed';
-        augRef.type = 'button';
+        augRef.dataset.state = open ? "open" : "closed";
+        augRef.type = "button";
       }
     }, [open]);
 
@@ -69,16 +69,16 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         <Component
           ref={augmentedRef}
           onPress={onPress}
-          role='button'
+          role="button"
           disabled={disabled}
           {...props}
         />
       </Popover.Trigger>
     );
-  }
+  },
 );
 
-Trigger.displayName = 'TriggerWebPopover';
+Trigger.displayName = "TriggerWebPopover";
 
 function Portal({ forceMount, container, children }: PopoverPortalProps) {
   return (
@@ -98,7 +98,7 @@ const Overlay = React.forwardRef<
   return <Component ref={ref} {...props} />;
 });
 
-Overlay.displayName = 'OverlayWebPopover';
+Overlay.displayName = "OverlayWebPopover";
 
 const Content = React.forwardRef<
   ViewRef,
@@ -108,8 +108,8 @@ const Content = React.forwardRef<
     {
       asChild = false,
       forceMount,
-      align = 'start',
-      side = 'bottom',
+      align = "start",
+      side = "bottom",
       sideOffset = 0,
       alignOffset = 0,
       avoidCollisions = true,
@@ -121,7 +121,7 @@ const Content = React.forwardRef<
       onPointerDownOutside,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Component = asChild ? Slot.View : View;
     return (
@@ -140,10 +140,10 @@ const Content = React.forwardRef<
         <Component ref={ref} {...props} />
       </Popover.Content>
     );
-  }
+  },
 );
 
-Content.displayName = 'ContentWebPopover';
+Content.displayName = "ContentWebPopover";
 
 const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, onPress: onPressProp, disabled, ...props }, ref) => {
@@ -161,7 +161,7 @@ const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
-        augRef.type = 'button';
+        augRef.type = "button";
       }
     }, []);
 
@@ -172,16 +172,16 @@ const Close = React.forwardRef<PressableRef, SlottablePressableProps>(
           <Component
             ref={augmentedRef}
             onPress={onPress}
-            role='button'
+            role="button"
             disabled={disabled}
             {...props}
           />
         </Popover.Close>
       </>
     );
-  }
+  },
 );
 
-Close.displayName = 'CloseWebPopover';
+Close.displayName = "CloseWebPopover";
 
 export { Close, Content, Overlay, Portal, Root, Trigger, usePopoverContext };

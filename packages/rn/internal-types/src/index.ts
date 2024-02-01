@@ -10,4 +10,3 @@ export type {
   TextRef,
   ViewRef,
 } from "./types";
-

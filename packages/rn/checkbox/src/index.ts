@@ -1,6 +1,6 @@
-import * as CheckboxWeb from './checkbox-web';
-import * as CheckboxNative from './checkbox-native';
-import { Platform } from 'react-native';
+import * as CheckboxWeb from "./checkbox-web";
+import * as CheckboxNative from "./checkbox-native";
+import { Platform } from "react-native";
 
 export const Root = Platform.select({
   web: CheckboxWeb.Root,

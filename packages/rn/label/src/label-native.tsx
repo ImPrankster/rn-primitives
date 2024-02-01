@@ -1,14 +1,14 @@
-import React from 'react';
-import { Pressable, Text as RNText } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
-import type { ComponentPropsWithAsChild } from '@rn-primitives/internal-types';
-import type { LabelRootProps, LabelTextProps } from './types';
+import React from "react";
+import { Pressable, Text as RNText } from "react-native";
+import * as Slot from "@rn-primitives/slot";
+import type { ComponentPropsWithAsChild } from "@rn-primitives/internal-types";
+import type { LabelRootProps, LabelTextProps } from "./types";
 
 const Root = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   Omit<
     ComponentPropsWithAsChild<typeof Pressable>,
-    'children' | 'hitSlop' | 'style'
+    "children" | "hitSlop" | "style"
   > &
     LabelRootProps
 >(({ asChild, ...props }, ref) => {
@@ -16,7 +16,7 @@ const Root = React.forwardRef<
   return <Component ref={ref} {...props} />;
 });
 
-Root.displayName = 'RootNativeLabel';
+Root.displayName = "RootNativeLabel";
 
 const Text = React.forwardRef<
   React.ElementRef<typeof RNText>,
@@ -26,6 +26,6 @@ const Text = React.forwardRef<
   return <Component ref={ref} {...props} />;
 });
 
-Text.displayName = 'TextNativeLabel';
+Text.displayName = "TextNativeLabel";
 
 export { Root, Text };

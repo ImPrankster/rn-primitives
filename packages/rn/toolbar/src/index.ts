@@ -1,7 +1,7 @@
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
 
-import * as ToolbarNative from './toolbar-native';
-import * as ToolbarWeb from './toolbar-web';
+import * as ToolbarNative from "./toolbar-native";
+import * as ToolbarWeb from "./toolbar-web";
 
 export const Root = Platform.select({
   web: ToolbarWeb.Root,

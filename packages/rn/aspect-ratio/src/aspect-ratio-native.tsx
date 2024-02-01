@@ -1,12 +1,12 @@
-import React from 'react';
-import { View } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
-import type { SlottableViewProps } from '@rn-primitives/internal-types';
-import type { AspectRatioRootProps } from './types';
+import React from "react";
+import { View } from "react-native";
+import * as Slot from "@rn-primitives/slot";
+import type { SlottableViewProps } from "@rn-primitives/internal-types";
+import type { AspectRatioRootProps } from "./types";
 
 const Root = React.forwardRef<
   React.ElementRef<typeof View>,
-  Omit<SlottableViewProps, 'style'> & AspectRatioRootProps
+  Omit<SlottableViewProps, "style"> & AspectRatioRootProps
 >(({ asChild, ratio = 1, style, ...props }, ref) => {
   const Component = asChild ? Slot.View : View;
   return (
@@ -14,6 +14,6 @@ const Root = React.forwardRef<
   );
 });
 
-Root.displayName = 'RootAspectRatio';
+Root.displayName = "RootAspectRatio";
 
 export { Root };

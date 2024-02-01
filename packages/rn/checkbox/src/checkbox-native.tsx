@@ -1,12 +1,12 @@
-import React from 'react';
-import { GestureResponderEvent, Pressable, View } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
+import React from "react";
+import { GestureResponderEvent, Pressable, View } from "react-native";
+import * as Slot from "@rn-primitives/slot";
 import type {
   ComponentPropsWithAsChild,
   PressableRef,
   SlottablePressableProps,
-} from '@rn-primitives/internal-types';
-import type { CheckboxIndicator, CheckboxRootProps } from './types';
+} from "@rn-primitives/internal-types";
+import type { CheckboxIndicator, CheckboxRootProps } from "./types";
 
 interface RootContext extends CheckboxRootProps {
   nativeID?: string;
@@ -20,7 +20,7 @@ const Root = React.forwardRef<
 >(
   (
     { asChild, disabled = false, checked, onCheckedChange, nativeID, ...props },
-    ref
+    ref,
   ) => {
     return (
       <CheckboxContext.Provider
@@ -34,16 +34,16 @@ const Root = React.forwardRef<
         <Trigger ref={ref} {...props} />
       </CheckboxContext.Provider>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootNativeCheckbox';
+Root.displayName = "RootNativeCheckbox";
 
 function useCheckboxContext() {
   const context = React.useContext(CheckboxContext);
   if (!context) {
     throw new Error(
-      'Checkbox compound components cannot be rendered outside the Checkbox component'
+      "Checkbox compound components cannot be rendered outside the Checkbox component",
     );
   }
   return context;
@@ -67,7 +67,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         ref={ref}
         nativeID={nativeID}
         aria-disabled={disabled}
-        role='checkbox'
+        role="checkbox"
         aria-checked={checked}
         onPress={onPress}
         accessibilityState={{
@@ -78,10 +78,10 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
-Trigger.displayName = 'TriggerNativeCheckbox';
+Trigger.displayName = "TriggerNativeCheckbox";
 
 const Indicator = React.forwardRef<
   React.ElementRef<typeof View>,
@@ -101,12 +101,12 @@ const Indicator = React.forwardRef<
       ref={ref}
       aria-disabled={disabled}
       aria-hidden={!(forceMount || checked)}
-      role={'presentation'}
+      role={"presentation"}
       {...props}
     />
   );
 });
 
-Indicator.displayName = 'IndicatorNativeCheckbox';
+Indicator.displayName = "IndicatorNativeCheckbox";
 
 export { Indicator, Root };

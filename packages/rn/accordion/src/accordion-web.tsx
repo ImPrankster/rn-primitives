@@ -1,19 +1,19 @@
-import * as Accordion from '@radix-ui/react-accordion';
-import React from 'react';
-import { View } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
+import * as Accordion from "@radix-ui/react-accordion";
+import React from "react";
+import { View } from "react-native";
+import * as Slot from "@rn-primitives/slot";
 import type {
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '@rn-primitives/internal-types';
+} from "@rn-primitives/internal-types";
 import type {
   AccordionContentProps,
   AccordionItemProps,
   AccordionRootProps,
-} from './types';
-import { useAugmentedRef } from '@rn-primitives/use-augmented-ref';
+} from "./types";
+import { useAugmentedRef } from "@rn-primitives/use-augmented-ref";
 
 const AccordionContext = React.createContext<AccordionRootProps | null>(null);
 
@@ -26,11 +26,11 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
       type,
       disabled,
       dir,
-      orientation = 'vertical',
+      orientation = "vertical",
       collapsible,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Component = asChild ? Slot.View : View;
     return (
@@ -60,16 +60,16 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AccordionRootProps>(
         </Accordion.Root>
       </AccordionContext.Provider>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootWebAccordion';
+Root.displayName = "RootWebAccordion";
 
 function useAccordionContext() {
   const context = React.useContext(AccordionContext);
   if (!context) {
     throw new Error(
-      'Accordion compound components cannot be rendered outside the Accordion component'
+      "Accordion compound components cannot be rendered outside the Accordion component",
     );
   }
   return context;
@@ -95,7 +95,7 @@ const Item = React.forwardRef<ViewRef, AccordionItemProps & SlottableViewProps>(
         const isExpanded = Array.isArray(value)
           ? value.includes(itemValue)
           : value === itemValue;
-        augRef.dataset.state = isExpanded ? 'open' : 'closed';
+        augRef.dataset.state = isExpanded ? "open" : "closed";
       }
     }, [value, itemValue]);
 
@@ -104,7 +104,7 @@ const Item = React.forwardRef<ViewRef, AccordionItemProps & SlottableViewProps>(
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
         augRef.dataset.orientation = orientation;
         if (disabled || disabledRoot) {
-          augRef.dataset.disabled = 'true';
+          augRef.dataset.disabled = "true";
         } else {
           augRef.dataset.disabled = undefined;
         }
@@ -125,16 +125,16 @@ const Item = React.forwardRef<ViewRef, AccordionItemProps & SlottableViewProps>(
         </Accordion.Item>
       </AccordionItemContext.Provider>
     );
-  }
+  },
 );
 
-Item.displayName = 'ItemWebAccordion';
+Item.displayName = "ItemWebAccordion";
 
 function useAccordionItemContext() {
   const context = React.useContext(AccordionItemContext);
   if (!context) {
     throw new Error(
-      'AccordionItem compound components cannot be rendered outside the AccordionItem component'
+      "AccordionItem compound components cannot be rendered outside the AccordionItem component",
     );
   }
   return context;
@@ -150,7 +150,7 @@ const Header = React.forwardRef<ViewRef, SlottableViewProps>(
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
-        augRef.dataset.state = isExpanded ? 'open' : 'closed';
+        augRef.dataset.state = isExpanded ? "open" : "closed";
       }
     }, [isExpanded]);
 
@@ -159,7 +159,7 @@ const Header = React.forwardRef<ViewRef, SlottableViewProps>(
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
         augRef.dataset.orientation = orientation;
         if (disabled || disabledRoot) {
-          augRef.dataset.disabled = 'true';
+          augRef.dataset.disabled = "true";
         } else {
           augRef.dataset.disabled = undefined;
         }
@@ -172,10 +172,10 @@ const Header = React.forwardRef<ViewRef, SlottableViewProps>(
         <Component ref={augmentedRef} {...props} />
       </Accordion.Header>
     );
-  }
+  },
 );
 
-Header.displayName = 'HeaderWebAccordion';
+Header.displayName = "HeaderWebAccordion";
 
 const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
   ({ asChild, disabled: disabledProp, ...props }, ref) => {
@@ -188,7 +188,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
 
-        augRef.dataset.state = isExpanded ? 'expanded' : 'closed';
+        augRef.dataset.state = isExpanded ? "expanded" : "closed";
       }
     }, [isExpanded]);
 
@@ -197,7 +197,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
 
         if (disabled || disabledRoot || disabledProp) {
-          augRef.dataset.disabled = 'true';
+          augRef.dataset.disabled = "true";
         } else {
           augRef.dataset.disabled = undefined;
         }
@@ -212,16 +212,16 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       >
         <Component
           ref={augmentedRef}
-          role='button'
+          role="button"
           disabled={disabledProp ?? disabledRoot ?? disabled}
           {...props}
         />
       </Accordion.Trigger>
     );
-  }
+  },
 );
 
-Trigger.displayName = 'TriggerWebAccordion';
+Trigger.displayName = "TriggerWebAccordion";
 
 const Content = React.forwardRef<
   ViewRef,
@@ -235,7 +235,7 @@ const Content = React.forwardRef<
   React.useLayoutEffect(() => {
     if (augmentedRef.current) {
       const augRef = augmentedRef.current as unknown as HTMLDivElement;
-      augRef.dataset.state = isExpanded ? 'expanded' : 'closed';
+      augRef.dataset.state = isExpanded ? "expanded" : "closed";
     }
   }, [isExpanded]);
 
@@ -245,7 +245,7 @@ const Content = React.forwardRef<
       augRef.dataset.orientation = orientation;
 
       if (disabled || disabledRoot) {
-        augRef.dataset.disabled = 'true';
+        augRef.dataset.disabled = "true";
       } else {
         augRef.dataset.disabled = undefined;
       }
@@ -260,7 +260,7 @@ const Content = React.forwardRef<
   );
 });
 
-Content.displayName = 'ContentWebAccordion';
+Content.displayName = "ContentWebAccordion";
 
 export {
   Content,
@@ -274,7 +274,7 @@ export {
 
 function isItemExpanded(
   rootValue: string | string[] | undefined,
-  value: string
+  value: string,
 ) {
   return Array.isArray(rootValue)
     ? rootValue.includes(value)

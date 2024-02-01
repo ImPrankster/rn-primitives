@@ -1,25 +1,25 @@
-import React from 'react';
+import React from "react";
 import {
   LayoutRectangle,
   ScaledSize,
   ViewStyle,
   useWindowDimensions,
-} from 'react-native';
-import type { Insets } from '@rn-primitives/internal-types';
+} from "react-native";
+import type { Insets } from "@rn-primitives/internal-types";
 
 const POSITION_ABSOLUTE: ViewStyle = {
-  position: 'absolute',
+  position: "absolute",
 };
 
 const HIDDEN_CONTENT: ViewStyle = {
-  position: 'absolute',
+  position: "absolute",
   opacity: 0,
   zIndex: -9999999,
 };
 
 type UseRelativePositionArgs = Omit<
   GetContentStyleArgs,
-  'triggerPosition' | 'contentLayout' | 'dimensions'
+  "triggerPosition" | "contentLayout" | "dimensions"
 > & {
   triggerPosition: LayoutPosition | null;
   contentLayout: LayoutRectangle | null;
@@ -75,7 +75,7 @@ interface GetPositionArgs {
 }
 
 interface GetSidePositionArgs extends GetPositionArgs {
-  side: 'top' | 'bottom';
+  side: "top" | "bottom";
   sideOffset: number;
 }
 
@@ -97,11 +97,11 @@ function getSidePosition({
 
   if (!avoidCollisions) {
     return {
-      top: side === 'top' ? positionTop : positionBottom,
+      top: side === "top" ? positionTop : positionBottom,
     };
   }
 
-  if (side === 'top') {
+  if (side === "top") {
     return {
       top: Math.max(insetTop, positionTop),
     };
@@ -110,13 +110,13 @@ function getSidePosition({
   return {
     top: Math.min(
       dimensions.height - insetBottom - contentLayout.height,
-      positionBottom
+      positionBottom,
     ),
   };
 }
 
 interface GetAlignPositionArgs extends GetPositionArgs {
-  align: 'start' | 'center' | 'end';
+  align: "start" | "center" | "end";
   alignOffset: number;
 }
 
@@ -143,7 +143,7 @@ function getAlignPosition({
     alignOffset,
     insetLeft,
     insetRight,
-    dimensions
+    dimensions,
   );
 
   if (avoidCollisions) {
@@ -160,7 +160,7 @@ function getAlignPosition({
       } else {
         const centeredPosition = Math.max(
           insetLeft,
-          (dimensions.width - contentWidth - insetRight) / 2
+          (dimensions.width - contentWidth - insetRight) / 2,
         );
         left = centeredPosition;
       }
@@ -171,28 +171,28 @@ function getAlignPosition({
 }
 
 function getLeftPosition(
-  align: 'start' | 'center' | 'end',
+  align: "start" | "center" | "end",
   triggerPageX: number,
   triggerWidth: number,
   contentWidth: number,
   alignOffset: number,
   insetLeft: number,
   insetRight: number,
-  dimensions: ScaledSize
+  dimensions: ScaledSize,
 ) {
   let left = 0;
-  if (align === 'start') {
+  if (align === "start") {
     left = triggerPageX;
   }
-  if (align === 'center') {
+  if (align === "center") {
     left = triggerPageX + triggerWidth / 2 - contentWidth / 2;
   }
-  if (align === 'end') {
+  if (align === "end") {
     left = triggerPageX + triggerWidth - contentWidth;
   }
   return Math.max(
     insetLeft,
-    Math.min(left + alignOffset, dimensions.width - contentWidth - insetRight)
+    Math.min(left + alignOffset, dimensions.width - contentWidth - insetRight),
   );
 }
 
@@ -230,6 +230,6 @@ function getContentStyle({
       alignOffset,
       insets,
       dimensions,
-    })
+    }),
   );
 }

@@ -2,11 +2,11 @@ interface ToolbarRootProps {
   /**
    * Platform: WEB ONLY
    */
-  orientation?: 'horizontal' | 'vertical';
+  orientation?: "horizontal" | "vertical";
   /**
    * Platform: WEB ONLY
    */
-  dir?: 'ltr' | 'rtl';
+  dir?: "ltr" | "rtl";
   /**
    * Platform: WEB ONLY
    */
@@ -14,13 +14,13 @@ interface ToolbarRootProps {
 }
 
 type SingleToggleGroupProps = {
-  type: 'single';
+  type: "single";
   value: string | undefined;
   onValueChange: (val: string | undefined) => void;
 };
 
 type MultipleToggleGroupProps = {
-  type: 'multiple';
+  type: "multiple";
   value: string[];
   onValueChange: (val: string[]) => void;
 };

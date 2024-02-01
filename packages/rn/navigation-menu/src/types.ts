@@ -1,4 +1,4 @@
-import { ForceMountable } from '@rn-primitives/internal-types';
+import { ForceMountable } from "@rn-primitives/internal-types";
 
 interface NavigationMenuRootProps {
   value: string | undefined;
@@ -14,11 +14,11 @@ interface NavigationMenuRootProps {
   /**
    * Platform: WEB ONLY
    */
-  dir?: 'ltr' | 'rtl';
+  dir?: "ltr" | "rtl";
   /**
    * Platform: WEB ONLY
    */
-  orientation?: 'horizontal' | 'vertical';
+  orientation?: "horizontal" | "vertical";
 }
 
 interface NavigationMenuItemProps {

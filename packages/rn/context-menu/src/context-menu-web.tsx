@@ -1,8 +1,8 @@
-import * as ContextMenu from '@radix-ui/react-context-menu';
-import React from 'react';
-import { GestureResponderEvent, Pressable, Text, View } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
-import { useAugmentedRef } from '@rn-primitives/use-augmented-ref';
+import * as ContextMenu from "@radix-ui/react-context-menu";
+import React from "react";
+import { GestureResponderEvent, Pressable, Text, View } from "react-native";
+import * as Slot from "@rn-primitives/slot";
+import { useAugmentedRef } from "@rn-primitives/use-augmented-ref";
 import type {
   ForceMountable,
   PositionedContentProps,
@@ -12,7 +12,7 @@ import type {
   SlottableViewProps,
   TextRef,
   ViewRef,
-} from '@rn-primitives/internal-types';
+} from "@rn-primitives/internal-types";
 import type {
   ContextMenuCheckboxItemProps,
   ContextMenuItemProps,
@@ -24,11 +24,11 @@ import type {
   ContextMenuSeparatorProps,
   ContextMenuSubProps,
   ContextMenuSubTriggerProps,
-} from './types';
-import { EmptyGestureResponderEvent } from '@rn-primitives/empty-gesture-recognizer-event';
+} from "./types";
+import { EmptyGestureResponderEvent } from "@rn-primitives/empty-gesture-recognizer-event";
 
 const ContextMenuContext = React.createContext<ContextMenuRootProps | null>(
-  null
+  null,
 );
 
 const Root = React.forwardRef<
@@ -45,13 +45,13 @@ const Root = React.forwardRef<
   );
 });
 
-Root.displayName = 'RootWebContextMenu';
+Root.displayName = "RootWebContextMenu";
 
 function useContextMenuContext() {
   const context = React.useContext(ContextMenuContext);
   if (!context) {
     throw new Error(
-      'ContextMenu compound components cannot be rendered outside the ContextMenu component'
+      "ContextMenu compound components cannot be rendered outside the ContextMenu component",
     );
   }
   return context;
@@ -66,7 +66,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
-        augRef.dataset.state = open ? 'open' : 'closed';
+        augRef.dataset.state = open ? "open" : "closed";
       }
     }, [open]);
 
@@ -74,7 +74,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLDivElement;
         if (disabled) {
-          augRef.dataset.disabled = 'true';
+          augRef.dataset.disabled = "true";
         } else {
           augRef.dataset.disabled = undefined;
         }
@@ -87,10 +87,10 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         <Component ref={augmentedRef} disabled={disabled} {...props} />
       </ContextMenu.Trigger>
     );
-  }
+  },
 );
 
-Trigger.displayName = 'TriggerWebContextMenu';
+Trigger.displayName = "TriggerWebContextMenu";
 
 function Portal({ forceMount, container, children }: ContextMenuPortalProps) {
   return (
@@ -110,7 +110,7 @@ const Overlay = React.forwardRef<
   return <Component ref={ref} {...props} />;
 });
 
-Overlay.displayName = 'OverlayWebContextMenu';
+Overlay.displayName = "OverlayWebContextMenu";
 
 const ContextMenuContentContext = React.createContext<{
   close: () => void;
@@ -141,7 +141,7 @@ const Content = React.forwardRef<
       hideWhenDetached,
       ...props
     },
-    ref
+    ref,
   ) => {
     const itemRef = React.useRef<HTMLDivElement>(null);
 
@@ -171,7 +171,7 @@ const Content = React.forwardRef<
           <ContextMenu.Item
             ref={itemRef}
             aria-hidden
-            style={{ position: 'fixed', top: 0, left: 0, zIndex: -999999999 }}
+            style={{ position: "fixed", top: 0, left: 0, zIndex: -999999999 }}
             aria-disabled
             tabIndex={-1}
             hidden
@@ -179,16 +179,16 @@ const Content = React.forwardRef<
         </ContextMenu.Content>
       </ContextMenuContentContext.Provider>
     );
-  }
+  },
 );
 
-Content.displayName = 'ContentWebContextMenu';
+Content.displayName = "ContentWebContextMenu";
 
 function useContextMenuContentContext() {
   const context = React.useContext(ContextMenuContentContext);
   if (!context) {
     throw new Error(
-      'ContextMenu compound components cannot be rendered outside the ContextMenu component'
+      "ContextMenu compound components cannot be rendered outside the ContextMenu component",
     );
   }
   return context;
@@ -200,12 +200,12 @@ const Item = React.forwardRef<
 >(
   (
     { asChild, textValue, closeOnPress = true, onPress: onPressProp, ...props },
-    ref
+    ref,
   ) => {
     const { close } = useContextMenuContentContext();
 
     function onKeyDown(ev: React.KeyboardEvent) {
-      if (ev.key === 'Enter' || ev.key === ' ') {
+      if (ev.key === "Enter" || ev.key === " ") {
         onPressProp?.(EmptyGestureResponderEvent);
         if (closeOnPress) {
           close();
@@ -230,17 +230,17 @@ const Item = React.forwardRef<
       >
         <Component
           ref={ref}
-          role='button'
+          role="button"
           onPress={onPress}
           onKeyDown={onKeyDown}
           {...props}
         />
       </ContextMenu.Item>
     );
-  }
+  },
 );
 
-Item.displayName = 'ItemWebContextMenu';
+Item.displayName = "ItemWebContextMenu";
 
 const Group = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
@@ -250,10 +250,10 @@ const Group = React.forwardRef<ViewRef, SlottableViewProps>(
         <Component ref={ref} {...props} />
       </ContextMenu.Group>
     );
-  }
+  },
 );
 
-Group.displayName = 'GroupWebContextMenu';
+Group.displayName = "GroupWebContextMenu";
 
 const Label = React.forwardRef<TextRef, SlottableTextProps>(
   ({ asChild, ...props }, ref) => {
@@ -263,10 +263,10 @@ const Label = React.forwardRef<TextRef, SlottableTextProps>(
         <Component ref={ref} {...props} />
       </ContextMenu.Label>
     );
-  }
+  },
 );
 
-Label.displayName = 'LabelWebContextMenu';
+Label.displayName = "LabelWebContextMenu";
 
 const CheckboxItem = React.forwardRef<
   PressableRef,
@@ -284,13 +284,13 @@ const CheckboxItem = React.forwardRef<
       onKeyDown: onKeyDownProp,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { close } = useContextMenuContentContext();
 
     function onKeyDown(ev: React.KeyboardEvent) {
       onKeyDownProp?.(ev);
-      if (ev.key === 'Enter' || ev.key === ' ') {
+      if (ev.key === "Enter" || ev.key === " ") {
         onPressProp?.(EmptyGestureResponderEvent);
         onCheckedChange?.(!checked);
         if (closeOnPress) {
@@ -323,15 +323,15 @@ const CheckboxItem = React.forwardRef<
           // @ts-expect-error web only
           onKeyDown={onKeyDown}
           onPress={onPress}
-          role='button'
+          role="button"
           {...props}
         />
       </ContextMenu.CheckboxItem>
     );
-  }
+  },
 );
 
-CheckboxItem.displayName = 'CheckboxItemWebContextMenu';
+CheckboxItem.displayName = "CheckboxItemWebContextMenu";
 
 const ContextMenuRadioGroupContext = React.createContext<{
   value?: string;
@@ -356,13 +356,13 @@ const RadioGroup = React.forwardRef<
   );
 });
 
-RadioGroup.displayName = 'RadioGroupWebContextMenu';
+RadioGroup.displayName = "RadioGroupWebContextMenu";
 
 function useContextMenuRadioGroupContext() {
   const context = React.useContext(ContextMenuRadioGroupContext);
   if (!context) {
     throw new Error(
-      'ContextMenu compound components cannot be rendered outside the ContextMenu component'
+      "ContextMenu compound components cannot be rendered outside the ContextMenu component",
     );
   }
   return context;
@@ -382,14 +382,14 @@ const RadioItem = React.forwardRef<
       onKeyDown: onKeyDownProp,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { onValueChange } = useContextMenuRadioGroupContext();
     const { close } = useContextMenuContentContext();
 
     function onKeyDown(ev: React.KeyboardEvent) {
       onKeyDownProp?.(ev);
-      if (ev.key === 'Enter' || ev.key === ' ') {
+      if (ev.key === "Enter" || ev.key === " ") {
         onValueChange?.(value);
         onPressProp?.(EmptyGestureResponderEvent);
         if (closeOnPress) {
@@ -423,10 +423,10 @@ const RadioItem = React.forwardRef<
         />
       </ContextMenu.RadioItem>
     );
-  }
+  },
 );
 
-RadioItem.displayName = 'RadioItemWebContextMenu';
+RadioItem.displayName = "RadioItemWebContextMenu";
 
 const ItemIndicator = React.forwardRef<
   ViewRef,
@@ -440,7 +440,7 @@ const ItemIndicator = React.forwardRef<
   );
 });
 
-ItemIndicator.displayName = 'ItemIndicatorWebContextMenu';
+ItemIndicator.displayName = "ItemIndicatorWebContextMenu";
 
 const Separator = React.forwardRef<
   ViewRef,
@@ -454,7 +454,7 @@ const Separator = React.forwardRef<
   );
 });
 
-Separator.displayName = 'SeparatorWebContextMenu';
+Separator.displayName = "SeparatorWebContextMenu";
 
 const ContextMenuSubContext = React.createContext<{
   open: boolean;
@@ -471,16 +471,16 @@ const Sub = React.forwardRef<ViewRef, SlottableViewProps & ContextMenuSubProps>(
         </ContextMenu.Sub>
       </ContextMenuSubContext.Provider>
     );
-  }
+  },
 );
 
-Sub.displayName = 'SubWebContextMenu';
+Sub.displayName = "SubWebContextMenu";
 
 function useSubContext() {
   const context = React.useContext(ContextMenuSubContext);
   if (!context) {
     throw new Error(
-      'ContextMenu compound components cannot be rendered outside the ContextMenu component'
+      "ContextMenu compound components cannot be rendered outside the ContextMenu component",
     );
   }
   return context;
@@ -502,7 +502,7 @@ const SubTrigger = React.forwardRef<
   );
 });
 
-SubTrigger.displayName = 'SubTriggerWebContextMenu';
+SubTrigger.displayName = "SubTriggerWebContextMenu";
 
 const SubContent = React.forwardRef<
   PressableRef,
@@ -518,7 +518,7 @@ const SubContent = React.forwardRef<
   );
 });
 
-Content.displayName = 'ContentWebContextMenu';
+Content.displayName = "ContentWebContextMenu";
 
 export {
   CheckboxItem,

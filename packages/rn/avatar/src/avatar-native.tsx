@@ -1,21 +1,21 @@
-import React from 'react';
+import React from "react";
 import {
   ImageErrorEventData,
   ImageLoadEventData,
   NativeSyntheticEvent,
   Image as RNImage,
   View,
-} from 'react-native';
-import { StoreApi, createStore, useStore } from 'zustand';
-import * as Slot from '@rn-primitives/slot';
+} from "react-native";
+import { StoreApi, createStore, useStore } from "zustand";
+import * as Slot from "@rn-primitives/slot";
 import {
   ComponentPropsWithAsChild,
   SlottableViewProps,
   ViewRef,
-} from '@rn-primitives/internal-types';
-import { AvatarImageProps, AvatarRootProps } from './types';
+} from "@rn-primitives/internal-types";
+import { AvatarImageProps, AvatarRootProps } from "./types";
 
-type AvatarState = 'loading' | 'error' | 'loaded';
+type AvatarState = "loading" | "error" | "loaded";
 
 interface RootStoreContext {
   status: AvatarState;
@@ -24,7 +24,7 @@ interface RootStoreContext {
 
 const RootContext = React.createContext<AvatarRootProps | null>(null);
 const RootStoreContext = React.createContext<StoreApi<RootStoreContext> | null>(
-  null
+  null,
 );
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & AvatarRootProps>(
@@ -32,7 +32,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AvatarRootProps>(
     const storeRef = React.useRef<StoreApi<RootStoreContext> | null>(null);
     if (!storeRef.current) {
       storeRef.current = createStore((set) => ({
-        status: 'loading',
+        status: "loading",
         setStatus: (status: AvatarState) => set({ status }),
       }));
     }
@@ -44,16 +44,16 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & AvatarRootProps>(
         </RootContext.Provider>
       </RootStoreContext.Provider>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootAvatar';
+Root.displayName = "RootAvatar";
 
 function useRootContext() {
   const context = React.useContext(RootContext);
   if (!context) {
     throw new Error(
-      'Avatar compound components cannot be rendered outside the Avatar component'
+      "Avatar compound components cannot be rendered outside the Avatar component",
     );
   }
   return context;
@@ -62,14 +62,14 @@ function useRootContext() {
 function useRootStoreContext<T>(selector: (state: RootStoreContext) => T): T {
   const store = React.useContext(RootStoreContext);
   if (!store) {
-    throw new Error('Missing StoreProvider');
+    throw new Error("Missing StoreProvider");
   }
   return useStore(store, selector);
 }
 
 const Image = React.forwardRef<
   React.ElementRef<typeof RNImage>,
-  Omit<ComponentPropsWithAsChild<typeof RNImage>, 'alt'> & AvatarImageProps
+  Omit<ComponentPropsWithAsChild<typeof RNImage>, "alt"> & AvatarImageProps
 >(
   (
     {
@@ -79,7 +79,7 @@ const Image = React.forwardRef<
       onLoadingStatusChange,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { alt } = useRootContext();
     const status = useRootStoreContext((state) => state.status);
@@ -87,23 +87,23 @@ const Image = React.forwardRef<
 
     const onLoad = React.useCallback(
       (e: NativeSyntheticEvent<ImageLoadEventData>) => {
-        setStatus('loaded');
-        onLoadingStatusChange?.('loaded');
+        setStatus("loaded");
+        onLoadingStatusChange?.("loaded");
         onLoadProps?.(e);
       },
-      [onLoadProps]
+      [onLoadProps],
     );
 
     const onError = React.useCallback(
       (e: NativeSyntheticEvent<ImageErrorEventData>) => {
-        setStatus('error');
-        onLoadingStatusChange?.('error');
+        setStatus("error");
+        onLoadingStatusChange?.("error");
         onErrorProps?.(e);
       },
-      [onErrorProps]
+      [onErrorProps],
     );
 
-    if (status === 'error') {
+    if (status === "error") {
       return null;
     }
 
@@ -117,24 +117,24 @@ const Image = React.forwardRef<
         {...props}
       />
     );
-  }
+  },
 );
 
-Image.displayName = 'ImageAvatar';
+Image.displayName = "ImageAvatar";
 
 const Fallback = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
     const { alt } = useRootContext();
     const status = useRootStoreContext((state) => state.status);
 
-    if (status !== 'error') {
+    if (status !== "error") {
       return null;
     }
     const Component = asChild ? Slot.View : View;
-    return <Component ref={ref} role={'img'} aria-label={alt} {...props} />;
-  }
+    return <Component ref={ref} role={"img"} aria-label={alt} {...props} />;
+  },
 );
 
-Fallback.displayName = 'FallbackAvatar';
+Fallback.displayName = "FallbackAvatar";
 
 export { Fallback, Image, Root };

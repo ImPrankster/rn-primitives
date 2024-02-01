@@ -6,7 +6,7 @@ interface SliderRootProps {
   /**
    * Platform: WEB ONLY
    */
-  dir?: 'ltr' | 'rtl';
+  dir?: "ltr" | "rtl";
   /**
    * Platform: WEB ONLY
    */

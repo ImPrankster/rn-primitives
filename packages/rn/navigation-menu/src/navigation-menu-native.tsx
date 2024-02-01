@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   BackHandler,
   Pressable,
@@ -6,27 +6,27 @@ import {
   type GestureResponderEvent,
   type LayoutChangeEvent,
   type LayoutRectangle,
-} from 'react-native';
-import { createStore, useStore, type StoreApi } from 'zustand';
+} from "react-native";
+import { createStore, useStore, type StoreApi } from "zustand";
 import {
   useRelativePosition,
   type LayoutPosition,
-} from '@rn-primitives/use-relative-position';
-import { Portal as RNPPortal } from '@rn-primitives/portal';
-import * as Slot from '@rn-primitives/slot';
+} from "@rn-primitives/use-relative-position";
+import { Portal as RNPPortal } from "@rn-primitives/portal";
+import * as Slot from "@rn-primitives/slot";
 import type {
   PositionedContentProps,
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '@rn-primitives/internal-types';
+} from "@rn-primitives/internal-types";
 import type {
   NavigationMenuItemProps,
   NavigationMenuLinkProps,
   NavigationMenuPortalProps,
   NavigationMenuRootProps,
-} from './types';
+} from "./types";
 
 const RootContext = React.createContext<NavigationMenuRootProps | null>(null);
 
@@ -42,18 +42,18 @@ const Root = React.forwardRef<
         onValueChange,
       }}
     >
-      <Component ref={ref} role='navigation' {...viewProps} />
+      <Component ref={ref} role="navigation" {...viewProps} />
     </RootContext.Provider>
   );
 });
 
-Root.displayName = 'RootNativeNavigationMenu';
+Root.displayName = "RootNativeNavigationMenu";
 
 function useNavigationMenuContext() {
   const context = React.useContext(RootContext);
   if (!context) {
     throw new Error(
-      'NavigationMenu compound components cannot be rendered outside the NavigationMenu component'
+      "NavigationMenu compound components cannot be rendered outside the NavigationMenu component",
     );
   }
   return context;
@@ -62,11 +62,11 @@ function useNavigationMenuContext() {
 const List = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...viewProps }, ref) => {
     const Component = asChild ? Slot.View : View;
-    return <Component ref={ref} role='menubar' {...viewProps} />;
-  }
+    return <Component ref={ref} role="menubar" {...viewProps} />;
+  },
 );
 
-List.displayName = 'ListNativeNavigationMenu';
+List.displayName = "ListNativeNavigationMenu";
 
 interface ItemStoreContext {
   triggerPosition: LayoutPosition | null;
@@ -78,7 +78,7 @@ interface ItemStoreContext {
 
 const ItemContext = React.createContext<NavigationMenuItemProps | null>(null);
 const ItemStoreContext = React.createContext<StoreApi<ItemStoreContext> | null>(
-  null
+  null,
 );
 
 const Item = React.forwardRef<
@@ -107,19 +107,19 @@ const Item = React.forwardRef<
           value,
         }}
       >
-        <Component ref={ref} role='menuitem' {...viewProps} />
+        <Component ref={ref} role="menuitem" {...viewProps} />
       </ItemContext.Provider>
     </ItemStoreContext.Provider>
   );
 });
 
-Item.displayName = 'ItemNativeNavigationMenu';
+Item.displayName = "ItemNativeNavigationMenu";
 
 function useItemContext() {
   const context = React.useContext(ItemContext);
   if (!context) {
     throw new Error(
-      'NavigationMenu compound components cannot be rendered outside the NavigationMenu component'
+      "NavigationMenu compound components cannot be rendered outside the NavigationMenu component",
     );
   }
   return context;
@@ -129,7 +129,7 @@ function useItemStoreContext<T>(selector: (state: ItemStoreContext) => T): T {
   const store = React.useContext(ItemStoreContext);
   if (!store) {
     throw new Error(
-      'NavigationMenu compound components cannot be rendered outside the NavigationMenu component'
+      "NavigationMenu compound components cannot be rendered outside the NavigationMenu component",
     );
   }
   return useStore(store, selector);
@@ -139,7 +139,7 @@ function useGetItemStore() {
   const store = React.useContext(ItemStoreContext);
   if (!store) {
     throw new Error(
-      'NavigationMenu compound components cannot be rendered outside the NavigationMenu component'
+      "NavigationMenu compound components cannot be rendered outside the NavigationMenu component",
     );
   }
   return store;
@@ -151,7 +151,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     const { value, onValueChange } = useNavigationMenuContext();
     const { value: menuValue } = useItemContext();
     const setTriggerPosition = useItemStoreContext(
-      (state) => state.setTriggerPosition
+      (state) => state.setTriggerPosition,
     );
 
     React.useImperativeHandle(
@@ -162,7 +162,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         }
         return triggerRef.current;
       },
-      [triggerRef.current]
+      [triggerRef.current],
     );
 
     function onPress(ev: GestureResponderEvent) {
@@ -171,7 +171,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         setTriggerPosition({ width, pageX, pageY: pageY, height });
       });
 
-      onValueChange(menuValue === value ? '' : menuValue);
+      onValueChange(menuValue === value ? "" : menuValue);
       onPressProp?.(ev);
     }
 
@@ -180,17 +180,17 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       <Component
         ref={triggerRef}
         aria-disabled={disabled ?? undefined}
-        role='button'
+        role="button"
         onPress={onPress}
         disabled={disabled ?? undefined}
         aria-expanded={value === menuValue}
         {...props}
       />
     );
-  }
+  },
 );
 
-Trigger.displayName = 'TriggerNativeNavigationMenu';
+Trigger.displayName = "TriggerNativeNavigationMenu";
 
 /**
  * @warning when using a custom `<PortalHost />`, you will have to adjust the Content's sideOffset to account for nav elements like headers.
@@ -237,8 +237,8 @@ const Content = React.forwardRef<
     {
       asChild = false,
       forceMount,
-      align = 'center',
-      side = 'bottom',
+      align = "center",
+      side = "bottom",
       sideOffset = 0,
       alignOffset = 0,
       avoidCollisions = true,
@@ -248,31 +248,31 @@ const Content = React.forwardRef<
       disablePositioningStyle,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { value, onValueChange } = useNavigationMenuContext();
     const { value: menuValue } = useItemContext();
     const nativeID = useItemStoreContext((state) => state.nativeID);
     const triggerPosition = useItemStoreContext(
-      (state) => state.triggerPosition
+      (state) => state.triggerPosition,
     );
     const setTriggerPosition = useItemStoreContext(
-      (state) => state.setTriggerPosition
+      (state) => state.setTriggerPosition,
     );
     const contentLayout = useItemStoreContext((state) => state.contentLayout);
     const setContentLayout = useItemStoreContext(
-      (state) => state.setContentLayout
+      (state) => state.setContentLayout,
     );
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener(
-        'hardwareBackPress',
+        "hardwareBackPress",
         () => {
           setTriggerPosition(null);
           setContentLayout(null);
-          onValueChange('');
+          onValueChange("");
           return true;
-        }
+        },
       );
 
       return () => {
@@ -308,7 +308,7 @@ const Content = React.forwardRef<
     return (
       <Component
         ref={ref}
-        role='menu'
+        role="menu"
         nativeID={nativeID}
         aria-modal={true}
         style={[positionStyle, style]}
@@ -317,38 +317,38 @@ const Content = React.forwardRef<
         {...props}
       />
     );
-  }
+  },
 );
 
-Content.displayName = 'ContentNativeNavigationMenu';
+Content.displayName = "ContentNativeNavigationMenu";
 
 const Link = React.forwardRef<
   PressableRef,
   SlottablePressableProps & NavigationMenuLinkProps
 >(({ asChild, ...props }, ref) => {
   const Component = asChild ? Slot.Pressable : Pressable;
-  return <Component ref={ref} role='link' {...props} />;
+  return <Component ref={ref} role="link" {...props} />;
 });
 
-Link.displayName = 'LinkNativeNavigationMenu';
+Link.displayName = "LinkNativeNavigationMenu";
 
 const Viewport = React.forwardRef<
   ViewRef,
-  Omit<React.ComponentPropsWithoutRef<typeof View>, 'children'>
+  Omit<React.ComponentPropsWithoutRef<typeof View>, "children">
 >((props, ref) => {
   return <View ref={ref} {...props} />;
 });
 
-Viewport.displayName = 'ViewportNativeNavigationMenu';
+Viewport.displayName = "ViewportNativeNavigationMenu";
 
 const Indicator = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
     const Component = asChild ? Slot.View : View;
     return <Component ref={ref} {...props} />;
-  }
+  },
 );
 
-Indicator.displayName = 'IndicatorNativeNavigationMenu';
+Indicator.displayName = "IndicatorNativeNavigationMenu";
 
 export {
   Content,

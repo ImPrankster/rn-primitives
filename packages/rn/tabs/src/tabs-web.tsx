@@ -1,13 +1,13 @@
-import * as Tabs from '@radix-ui/react-tabs';
-import React from 'react';
-import { Pressable, View } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
+import * as Tabs from "@radix-ui/react-tabs";
+import React from "react";
+import { Pressable, View } from "react-native";
+import * as Slot from "@rn-primitives/slot";
 import type {
   ComponentPropsWithAsChild,
   SlottableViewProps,
   ViewRef,
-} from '@rn-primitives/internal-types';
-import type { TabsContentProps, TabsRootProps } from './types';
+} from "@rn-primitives/internal-types";
+import type { TabsContentProps, TabsRootProps } from "./types";
 
 const TabsContext = React.createContext<TabsRootProps | null>(null);
 const Root = React.forwardRef<ViewRef, SlottableViewProps & TabsRootProps>(
@@ -21,7 +21,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & TabsRootProps>(
       activationMode,
       ...viewProps
     },
-    ref
+    ref,
   ) => {
     const Component = asChild ? Slot.View : View;
     return (
@@ -43,16 +43,16 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & TabsRootProps>(
         </Tabs.Root>
       </TabsContext.Provider>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootWebTabs';
+Root.displayName = "RootWebTabs";
 
 function useTabsContext() {
   const context = React.useContext(TabsContext);
   if (!context) {
     throw new Error(
-      'Tabs compound components cannot be rendered outside the Tabs component'
+      "Tabs compound components cannot be rendered outside the Tabs component",
     );
   }
   return context;
@@ -66,10 +66,10 @@ const List = React.forwardRef<ViewRef, SlottableViewProps>(
         <Component ref={ref} {...props} />
       </Tabs.List>
     );
-  }
+  },
 );
 
-List.displayName = 'ListWebTabs';
+List.displayName = "ListWebTabs";
 
 const TriggerContext = React.createContext<{ value: string } | null>(null);
 const Trigger = React.forwardRef<
@@ -88,13 +88,13 @@ const Trigger = React.forwardRef<
   );
 });
 
-Trigger.displayName = 'TriggerWebTabs';
+Trigger.displayName = "TriggerWebTabs";
 
 function useTriggerContext() {
   const context = React.useContext(TriggerContext);
   if (!context) {
     throw new Error(
-      'Tabs.Trigger compound components cannot be rendered outside the Tabs.Trigger component'
+      "Tabs.Trigger compound components cannot be rendered outside the Tabs.Trigger component",
     );
   }
   return context;
@@ -112,6 +112,6 @@ const Content = React.forwardRef<
   );
 });
 
-Content.displayName = 'ContentWebTabs';
+Content.displayName = "ContentWebTabs";
 
 export { Content, List, Root, Trigger, useTabsContext, useTriggerContext };

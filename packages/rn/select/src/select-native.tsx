@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   BackHandler,
   Pressable,
@@ -7,14 +7,14 @@ import {
   type GestureResponderEvent,
   type LayoutChangeEvent,
   type LayoutRectangle,
-} from 'react-native';
-import { createStore, useStore, type StoreApi } from 'zustand';
+} from "react-native";
+import { createStore, useStore, type StoreApi } from "zustand";
 import {
   useRelativePosition,
   type LayoutPosition,
-} from '@rn-primitives/use-relative-position';
-import { Portal as RNPPortal } from '@rn-primitives/portal';
-import * as Slot from '@rn-primitives/slot';
+} from "@rn-primitives/use-relative-position";
+import { Portal as RNPPortal } from "@rn-primitives/portal";
+import * as Slot from "@rn-primitives/slot";
 import type {
   ForceMountable,
   PositionedContentProps,
@@ -24,7 +24,7 @@ import type {
   SlottableViewProps,
   TextRef,
   ViewRef,
-} from '@rn-primitives/internal-types';
+} from "@rn-primitives/internal-types";
 import type {
   SelectContentProps,
   SelectItemProps,
@@ -33,7 +33,7 @@ import type {
   SelectRootProps,
   SelectSeparatorProps,
   SelectValueProps,
-} from './types';
+} from "./types";
 
 interface RootStoreContext {
   pressPosition: LayoutPosition | null;
@@ -45,7 +45,7 @@ interface RootStoreContext {
 
 const RootContext = React.createContext<SelectRootProps | null>(null);
 const RootStoreContext = React.createContext<StoreApi<RootStoreContext> | null>(
-  null
+  null,
 );
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
@@ -59,7 +59,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
       disabled,
       ...viewProps
     },
-    ref
+    ref,
   ) => {
     const nativeID = React.useId();
     const storeRef = React.useRef<StoreApi<RootStoreContext> | null>(null);
@@ -85,16 +85,16 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
         </RootContext.Provider>
       </RootStoreContext.Provider>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootNativeSelect';
+Root.displayName = "RootNativeSelect";
 
 function useSelectContext() {
   const context = React.useContext(RootContext);
   if (!context) {
     throw new Error(
-      'Select compound components cannot be rendered outside the Select component'
+      "Select compound components cannot be rendered outside the Select component",
     );
   }
   return context;
@@ -104,7 +104,7 @@ function useRootStoreContext<T>(selector: (state: RootStoreContext) => T): T {
   const store = React.useContext(RootStoreContext);
   if (!store) {
     throw new Error(
-      'Select compound components cannot be rendered outside the Select component'
+      "Select compound components cannot be rendered outside the Select component",
     );
   }
   return useStore(store, selector);
@@ -114,7 +114,7 @@ function useGetRootStore() {
   const store = React.useContext(RootStoreContext);
   if (!store) {
     throw new Error(
-      'Select compound components cannot be rendered outside the Select component'
+      "Select compound components cannot be rendered outside the Select component",
     );
   }
   return store;
@@ -125,7 +125,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     const triggerRef = React.useRef<View>(null);
     const { open, onOpenChange, disabled: disabledRoot } = useSelectContext();
     const setTriggerPosition = useRootStoreContext(
-      (state) => state.setTriggerPosition
+      (state) => state.setTriggerPosition,
     );
 
     React.useImperativeHandle(
@@ -136,7 +136,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         }
         return triggerRef.current;
       },
-      [triggerRef.current]
+      [triggerRef.current],
     );
 
     function onPress(ev: GestureResponderEvent) {
@@ -153,17 +153,17 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       <Component
         ref={triggerRef}
         aria-disabled={disabled ?? undefined}
-        role='combobox'
+        role="combobox"
         onPress={onPress}
         disabled={disabled ?? disabledRoot}
         aria-expanded={open}
         {...props}
       />
     );
-  }
+  },
 );
 
-Trigger.displayName = 'TriggerNativeSelect';
+Trigger.displayName = "TriggerNativeSelect";
 
 const Value = React.forwardRef<TextRef, SlottableTextProps & SelectValueProps>(
   ({ asChild, placeholder, ...props }, ref) => {
@@ -174,10 +174,10 @@ const Value = React.forwardRef<TextRef, SlottableTextProps & SelectValueProps>(
         {value?.label ?? placeholder}
       </Component>
     );
-  }
+  },
 );
 
-Value.displayName = 'ValueNativeSelect';
+Value.displayName = "ValueNativeSelect";
 
 /**
  * @warning when using a custom `<PortalHost />`, you might have to adjust the Content's sideOffset.
@@ -219,14 +219,14 @@ const Overlay = React.forwardRef<
       closeOnPress = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { open, onOpenChange } = useSelectContext();
     const setTriggerPosition = useRootStoreContext(
-      (state) => state.setTriggerPosition
+      (state) => state.setTriggerPosition,
     );
     const setContentLayout = useRootStoreContext(
-      (state) => state.setContentLayout
+      (state) => state.setContentLayout,
     );
 
     function onPress(ev: GestureResponderEvent) {
@@ -246,10 +246,10 @@ const Overlay = React.forwardRef<
 
     const Component = asChild ? Slot.Pressable : Pressable;
     return <Component ref={ref} onPress={onPress} {...props} />;
-  }
+  },
 );
 
-Overlay.displayName = 'OverlayNativeSelect';
+Overlay.displayName = "OverlayNativeSelect";
 
 /**
  * @info `position`, `top`, `left`, and `maxWidth` style properties are controlled internally. Opt out of this behavior by setting `disablePositioningStyle` to `true`.
@@ -262,8 +262,8 @@ const Content = React.forwardRef<
     {
       asChild = false,
       forceMount,
-      align = 'start',
-      side = 'bottom',
+      align = "start",
+      side = "bottom",
       sideOffset = 0,
       alignOffset = 0,
       avoidCollisions = true,
@@ -274,28 +274,28 @@ const Content = React.forwardRef<
       position: _position,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { open, onOpenChange } = useSelectContext();
     const nativeID = useRootStoreContext((state) => state.nativeID);
     const pressPosition = useRootStoreContext((state) => state.pressPosition);
     const setTriggerPosition = useRootStoreContext(
-      (state) => state.setTriggerPosition
+      (state) => state.setTriggerPosition,
     );
     const contentLayout = useRootStoreContext((state) => state.contentLayout);
     const setContentLayout = useRootStoreContext(
-      (state) => state.setContentLayout
+      (state) => state.setContentLayout,
     );
 
     React.useEffect(() => {
       const backHandler = BackHandler.addEventListener(
-        'hardwareBackPress',
+        "hardwareBackPress",
         () => {
           setTriggerPosition(null);
           setContentLayout(null);
           onOpenChange(false);
           return true;
-        }
+        },
       );
 
       return () => {
@@ -331,7 +331,7 @@ const Content = React.forwardRef<
     return (
       <Component
         ref={ref}
-        role='list'
+        role="list"
         nativeID={nativeID}
         aria-modal={true}
         style={[positionStyle, style]}
@@ -340,10 +340,10 @@ const Content = React.forwardRef<
         {...props}
       />
     );
-  }
+  },
 );
 
-Content.displayName = 'ContentNativeSelect';
+Content.displayName = "ContentNativeSelect";
 
 const ItemContext = React.createContext<{
   itemValue: string;
@@ -364,14 +364,14 @@ const Item = React.forwardRef<
       closeOnPress = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { onOpenChange, value, onValueChange } = useSelectContext();
     const setTriggerPosition = useRootStoreContext(
-      (state) => state.setTriggerPosition
+      (state) => state.setTriggerPosition,
     );
     const setContentLayout = useRootStoreContext(
-      (state) => state.setContentLayout
+      (state) => state.setContentLayout,
     );
 
     function onPress(ev: GestureResponderEvent) {
@@ -382,7 +382,7 @@ const Item = React.forwardRef<
       }
 
       onValueChange(
-        value?.value === itemValue ? undefined : { value: itemValue, label }
+        value?.value === itemValue ? undefined : { value: itemValue, label },
       );
       onPressProp?.(ev);
     }
@@ -392,7 +392,7 @@ const Item = React.forwardRef<
       <ItemContext.Provider value={{ itemValue, label }}>
         <Component
           ref={ref}
-          role='option'
+          role="option"
           onPress={onPress}
           disabled={disabled}
           aria-checked={value?.value === itemValue}
@@ -406,16 +406,16 @@ const Item = React.forwardRef<
         />
       </ItemContext.Provider>
     );
-  }
+  },
 );
 
-Item.displayName = 'ItemNativeSelect';
+Item.displayName = "ItemNativeSelect";
 
 function useItemContext() {
   const context = React.useContext(ItemContext);
   if (!context) {
     throw new Error(
-      'Item compound components cannot be rendered outside of an Item component'
+      "Item compound components cannot be rendered outside of an Item component",
     );
   }
   return context;
@@ -423,7 +423,7 @@ function useItemContext() {
 
 const ItemText = React.forwardRef<
   TextRef,
-  Omit<SlottableTextProps, 'children'>
+  Omit<SlottableTextProps, "children">
 >(({ asChild, ...props }, ref) => {
   const { label } = useItemContext();
 
@@ -435,7 +435,7 @@ const ItemText = React.forwardRef<
   );
 });
 
-ItemText.displayName = 'ItemTextNativeSelect';
+ItemText.displayName = "ItemTextNativeSelect";
 
 const ItemIndicator = React.forwardRef<
   ViewRef,
@@ -450,28 +450,28 @@ const ItemIndicator = React.forwardRef<
     }
   }
   const Component = asChild ? Slot.View : View;
-  return <Component ref={ref} role='presentation' {...props} />;
+  return <Component ref={ref} role="presentation" {...props} />;
 });
 
-ItemIndicator.displayName = 'ItemIndicatorNativeSelect';
+ItemIndicator.displayName = "ItemIndicatorNativeSelect";
 
 const Group = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
     const Component = asChild ? Slot.View : View;
-    return <Component ref={ref} role='group' {...props} />;
-  }
+    return <Component ref={ref} role="group" {...props} />;
+  },
 );
 
-Group.displayName = 'GroupNativeSelect';
+Group.displayName = "GroupNativeSelect";
 
 const Label = React.forwardRef<TextRef, SlottableTextProps>(
   ({ asChild, ...props }, ref) => {
     const Component = asChild ? Slot.Text : Text;
     return <Component ref={ref} {...props} />;
-  }
+  },
 );
 
-Label.displayName = 'LabelNativeSelect';
+Label.displayName = "LabelNativeSelect";
 
 const Separator = React.forwardRef<
   ViewRef,
@@ -480,14 +480,14 @@ const Separator = React.forwardRef<
   const Component = asChild ? Slot.View : View;
   return (
     <Component
-      role={decorative ? 'presentation' : 'separator'}
+      role={decorative ? "presentation" : "separator"}
       ref={ref}
       {...props}
     />
   );
 });
 
-Separator.displayName = 'SeparatorNativeSelect';
+Separator.displayName = "SeparatorNativeSelect";
 
 const ScrollUpButton = ({ children }: { children: React.ReactNode }) => {
   return children;

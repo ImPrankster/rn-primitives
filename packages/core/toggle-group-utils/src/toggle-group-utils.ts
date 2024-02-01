@@ -1,8 +1,11 @@
-export function getIsSelected(value: string | string[] | undefined, itemValue: string) {
+export function getIsSelected(
+  value: string | string[] | undefined,
+  itemValue: string,
+) {
   if (value === undefined) {
     return false;
   }
-  if (typeof value === 'string') {
+  if (typeof value === "string") {
     return value === itemValue;
   }
   return value.includes(itemValue);
@@ -10,7 +13,7 @@ export function getIsSelected(value: string | string[] | undefined, itemValue: s
 
 export function getNewSingleValue(
   originalValue: string | string[] | undefined,
-  itemValue: string
+  itemValue: string,
 ) {
   if (originalValue === itemValue) {
     return undefined;
@@ -20,12 +23,12 @@ export function getNewSingleValue(
 
 export function getNewMultipleValue(
   originalValue: string | string[] | undefined,
-  itemValue: string
+  itemValue: string,
 ) {
   if (originalValue === undefined) {
     return [itemValue];
   }
-  if (typeof originalValue === 'string') {
+  if (typeof originalValue === "string") {
     return originalValue === itemValue ? [] : [originalValue, itemValue];
   }
   if (originalValue.includes(itemValue)) {

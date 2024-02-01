@@ -1,4 +1,4 @@
-import { ForceMountable } from '@rn-primitives/internal-types';
+import { ForceMountable } from "@rn-primitives/internal-types";
 
 interface ContextMenuRootProps {
   /**
@@ -10,7 +10,7 @@ interface ContextMenuRootProps {
   /**
    * Platform: NATIVE ONLY
    */
-  relativeTo?: 'longPress' | 'trigger';
+  relativeTo?: "longPress" | "trigger";
 }
 
 interface ContextMenuPortalProps extends ForceMountable {

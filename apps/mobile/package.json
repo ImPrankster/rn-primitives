@@ -1,0 +1,19 @@
+{
+  "name": "mobile",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "expo start",
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "expo-status-bar": "~1.11.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  },
+  "private": true
+}

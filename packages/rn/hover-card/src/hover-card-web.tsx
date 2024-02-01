@@ -1,19 +1,19 @@
-import * as HoverCard from '@radix-ui/react-hover-card';
-import React from 'react';
-import { Pressable, View } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
+import * as HoverCard from "@radix-ui/react-hover-card";
+import React from "react";
+import { Pressable, View } from "react-native";
+import * as Slot from "@rn-primitives/slot";
 import type {
   PositionedContentProps,
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '@rn-primitives/internal-types';
+} from "@rn-primitives/internal-types";
 import type {
   HoverCardOverlayProps,
   HoverCardPortalProps,
   HoverCardRootProps,
-} from './types';
+} from "./types";
 
 const HoverCardContext = React.createContext<HoverCardRootProps | null>(null);
 
@@ -27,16 +27,16 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & HoverCardRootProps>(
         </HoverCard.Root>
       </HoverCardContext.Provider>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootWebHoverCard';
+Root.displayName = "RootWebHoverCard";
 
 function useHoverCardContext() {
   const context = React.useContext(HoverCardContext);
   if (!context) {
     throw new Error(
-      'HoverCard compound components cannot be rendered outside the HoverCard component'
+      "HoverCard compound components cannot be rendered outside the HoverCard component",
     );
   }
   return context;
@@ -50,10 +50,10 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         <Component ref={ref} {...props} />
       </HoverCard.Trigger>
     );
-  }
+  },
 );
 
-Trigger.displayName = 'TriggerWebHoverCard';
+Trigger.displayName = "TriggerWebHoverCard";
 
 function Portal({ forceMount, container, children }: HoverCardPortalProps) {
   return (
@@ -73,7 +73,7 @@ const Overlay = React.forwardRef<
   return <Component ref={ref} {...props} />;
 });
 
-Overlay.displayName = 'OverlayWebHoverCard';
+Overlay.displayName = "OverlayWebHoverCard";
 
 const Content = React.forwardRef<
   PressableRef,
@@ -100,7 +100,7 @@ const Content = React.forwardRef<
       hideWhenDetached,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Component = asChild ? Slot.Pressable : Pressable;
     return (
@@ -123,9 +123,9 @@ const Content = React.forwardRef<
         <Component ref={ref} {...props} />
       </HoverCard.Content>
     );
-  }
+  },
 );
 
-Content.displayName = 'ContentWebHoverCard';
+Content.displayName = "ContentWebHoverCard";
 
 export { Content, Overlay, Portal, Root, Trigger, useHoverCardContext };

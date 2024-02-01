@@ -1,7 +1,7 @@
-import React from 'react';
-import { create } from 'zustand';
+import React from "react";
+import { create } from "zustand";
 
-const DEFAULT_PORTAL_HOST = 'INTERNAL_PRIMITIVE_DEFAULT_HOST_NAME';
+const DEFAULT_PORTAL_HOST = "INTERNAL_PRIMITIVE_DEFAULT_HOST_NAME";
 
 type PortalMap = Map<string, React.ReactNode>;
 type PortalHostMap = Map<string, PortalMap>;
@@ -9,14 +9,14 @@ type PortalHostMap = Map<string, PortalMap>;
 const usePortal = create<{ map: PortalHostMap }>(() => ({
   map: new Map<string, PortalMap>().set(
     DEFAULT_PORTAL_HOST,
-    new Map<string, React.ReactNode>()
+    new Map<string, React.ReactNode>(),
   ),
 }));
 
 const updatePortal = (
   hostName: string,
   name: string,
-  children: React.ReactNode
+  children: React.ReactNode,
 ) => {
   usePortal.setState((prev) => {
     const next = new Map(prev.map);

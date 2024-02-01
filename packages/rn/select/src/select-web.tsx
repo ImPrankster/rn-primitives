@@ -1,8 +1,8 @@
-import * as Select from '@radix-ui/react-select';
-import React from 'react';
-import { Pressable, Text, View } from 'react-native';
-import { useAugmentedRef } from '@rn-primitives/use-augmented-ref';
-import * as Slot from '@rn-primitives/slot';
+import * as Select from "@radix-ui/react-select";
+import React from "react";
+import { Pressable, Text, View } from "react-native";
+import { useAugmentedRef } from "@rn-primitives/use-augmented-ref";
+import * as Slot from "@rn-primitives/slot";
 import type {
   ForceMountable,
   PositionedContentProps,
@@ -12,7 +12,7 @@ import type {
   SlottableViewProps,
   TextRef,
   ViewRef,
-} from '@rn-primitives/internal-types';
+} from "@rn-primitives/internal-types";
 import type {
   SelectContentProps,
   SelectItemProps,
@@ -21,7 +21,7 @@ import type {
   SelectRootProps,
   SelectSeparatorProps,
   SelectValueProps,
-} from './types';
+} from "./types";
 
 const SelectContext = React.createContext<SelectRootProps | null>(null);
 
@@ -35,7 +35,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
       onOpenChange,
       ...viewProps
     },
-    ref
+    ref,
   ) => {
     function onValueChange(val: string) {
       onValueChangeProp({ value: val, label: val });
@@ -55,16 +55,16 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SelectRootProps>(
         </Select.Root>
       </SelectContext.Provider>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootWebSelect';
+Root.displayName = "RootWebSelect";
 
 function useSelectContext() {
   const context = React.useContext(SelectContext);
   if (!context) {
     throw new Error(
-      'Select compound components cannot be rendered outside the Select component'
+      "Select compound components cannot be rendered outside the Select component",
     );
   }
   return context;
@@ -79,8 +79,8 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
     React.useLayoutEffect(() => {
       if (augmentedRef.current) {
         const augRef = augmentedRef.current as unknown as HTMLButtonElement;
-        augRef.dataset.state = open ? 'open' : 'closed';
-        augRef.type = 'button';
+        augRef.dataset.state = open ? "open" : "closed";
+        augRef.type = "button";
       }
     }, [open]);
 
@@ -89,16 +89,16 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       <Select.Trigger disabled={disabled ?? undefined} asChild>
         <Component
           ref={augmentedRef}
-          role='button'
+          role="button"
           disabled={disabled}
           {...props}
         />
       </Select.Trigger>
     );
-  }
+  },
 );
 
-Trigger.displayName = 'TriggerWebSelect';
+Trigger.displayName = "TriggerWebSelect";
 
 const Value = React.forwardRef<TextRef, SlottableTextProps & SelectValueProps>(
   ({ asChild, placeholder, children, ...props }, ref) => {
@@ -107,10 +107,10 @@ const Value = React.forwardRef<TextRef, SlottableTextProps & SelectValueProps>(
         <Select.Value placeholder={placeholder}>{children}</Select.Value>
       </Slot.Text>
     );
-  }
+  },
 );
 
-Value.displayName = 'ValueWebSelect';
+Value.displayName = "ValueWebSelect";
 
 function Portal({ container, children }: SelectPortalProps) {
   return <Select.Portal children={children} container={container} />;
@@ -124,7 +124,7 @@ const Overlay = React.forwardRef<
   return <Component ref={ref} {...props} />;
 });
 
-Overlay.displayName = 'OverlayWebSelect';
+Overlay.displayName = "OverlayWebSelect";
 
 const Content = React.forwardRef<
   ViewRef,
@@ -134,9 +134,9 @@ const Content = React.forwardRef<
     {
       asChild = false,
       forceMount: _forceMount,
-      align = 'start',
-      side = 'bottom',
-      position = 'popper',
+      align = "start",
+      side = "bottom",
+      position = "popper",
       sideOffset = 0,
       alignOffset = 0,
       avoidCollisions = true,
@@ -147,7 +147,7 @@ const Content = React.forwardRef<
       onPointerDownOutside,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Component = asChild ? Slot.View : View;
     return (
@@ -165,10 +165,10 @@ const Content = React.forwardRef<
         <Component ref={ref} {...props} />
       </Select.Content>
     );
-  }
+  },
 );
 
-Content.displayName = 'ContentWebSelect';
+Content.displayName = "ContentWebSelect";
 
 const ItemContext = React.createContext<{
   itemValue: string;
@@ -194,13 +194,13 @@ const Item = React.forwardRef<
   );
 });
 
-Item.displayName = 'ItemWebSelect';
+Item.displayName = "ItemWebSelect";
 
 function useItemContext() {
   const context = React.useContext(ItemContext);
   if (!context) {
     throw new Error(
-      'Item compound components cannot be rendered outside of an Item component'
+      "Item compound components cannot be rendered outside of an Item component",
     );
   }
   return context;
@@ -208,7 +208,7 @@ function useItemContext() {
 
 const ItemText = React.forwardRef<
   TextRef,
-  Omit<SlottableTextProps, 'children'>
+  Omit<SlottableTextProps, "children">
 >(({ asChild, ...props }, ref) => {
   const { label } = useItemContext();
 
@@ -222,7 +222,7 @@ const ItemText = React.forwardRef<
   );
 });
 
-ItemText.displayName = 'ItemTextWebSelect';
+ItemText.displayName = "ItemTextWebSelect";
 
 const ItemIndicator = React.forwardRef<
   ViewRef,
@@ -236,7 +236,7 @@ const ItemIndicator = React.forwardRef<
   );
 });
 
-ItemIndicator.displayName = 'ItemIndicatorWebSelect';
+ItemIndicator.displayName = "ItemIndicatorWebSelect";
 
 const Group = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
@@ -246,10 +246,10 @@ const Group = React.forwardRef<ViewRef, SlottableViewProps>(
         <Component ref={ref} {...props} />
       </Select.Group>
     );
-  }
+  },
 );
 
-Group.displayName = 'GroupWebSelect';
+Group.displayName = "GroupWebSelect";
 
 const Label = React.forwardRef<TextRef, SlottableTextProps>(
   ({ asChild, ...props }, ref) => {
@@ -259,10 +259,10 @@ const Label = React.forwardRef<TextRef, SlottableTextProps>(
         <Component ref={ref} {...props} />
       </Select.Label>
     );
-  }
+  },
 );
 
-Label.displayName = 'LabelWebSelect';
+Label.displayName = "LabelWebSelect";
 
 const Separator = React.forwardRef<
   ViewRef,
@@ -276,22 +276,22 @@ const Separator = React.forwardRef<
   );
 });
 
-Separator.displayName = 'SeparatorWebSelect';
+Separator.displayName = "SeparatorWebSelect";
 
 const ScrollUpButton = (
-  props: React.ComponentPropsWithoutRef<typeof Select.ScrollUpButton>
+  props: React.ComponentPropsWithoutRef<typeof Select.ScrollUpButton>,
 ) => {
   return <Select.ScrollUpButton {...props} />;
 };
 
 const ScrollDownButton = (
-  props: React.ComponentPropsWithoutRef<typeof Select.ScrollDownButton>
+  props: React.ComponentPropsWithoutRef<typeof Select.ScrollDownButton>,
 ) => {
   return <Select.ScrollDownButton {...props} />;
 };
 
 const Viewport = (
-  props: React.ComponentPropsWithoutRef<typeof Select.Viewport>
+  props: React.ComponentPropsWithoutRef<typeof Select.Viewport>,
 ) => {
   return <Select.Viewport {...props} />;
 };

@@ -1,8 +1,11 @@
-import React from 'react';
-import { View } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
-import type { SlottableViewProps, ViewRef } from '@rn-primitives/internal-types';
-import type { ProgressRootProps } from './types';
+import React from "react";
+import { View } from "react-native";
+import * as Slot from "@rn-primitives/slot";
+import type {
+  SlottableViewProps,
+  ViewRef,
+} from "@rn-primitives/internal-types";
+import type { ProgressRootProps } from "./types";
 
 // This project uses code from WorkOS/Radix Primitives.
 // The code is licensed under the MIT License.
@@ -19,7 +22,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & ProgressRootProps>(
       getValueLabel = defaultGetValueLabel,
       ...props
     },
-    ref
+    ref,
   ) => {
     const max = maxProp ?? DEFAULT_MAX;
     const value = isValidValueNumber(valueProp, max) ? valueProp : 0;
@@ -27,7 +30,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & ProgressRootProps>(
     const Component = asChild ? Slot.View : View;
     return (
       <Component
-        role='progressbar'
+        role="progressbar"
         ref={ref}
         aria-valuemax={max}
         aria-valuemin={0}
@@ -42,19 +45,19 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & ProgressRootProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
-Root.displayName = 'RootProgress';
+Root.displayName = "RootProgress";
 
 const Indicator = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
     const Component = asChild ? Slot.View : View;
-    return <Component ref={ref} role='presentation' {...props} />;
-  }
+    return <Component ref={ref} role="presentation" {...props} />;
+  },
 );
 
-Indicator.displayName = 'IndicatorProgress';
+Indicator.displayName = "IndicatorProgress";
 
 export { Indicator, Root };
 
@@ -64,6 +67,6 @@ function defaultGetValueLabel(value: number, max: number) {
 
 function isValidValueNumber(value: any, max: number): value is number {
   return (
-    typeof value === 'number' && !isNaN(value) && value <= max && value >= 0
+    typeof value === "number" && !isNaN(value) && value <= max && value >= 0
   );
 }

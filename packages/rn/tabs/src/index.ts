@@ -1,7 +1,7 @@
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
 
-import * as TabsNative from './tabs-native';
-import * as TabsWeb from './tabs-web';
+import * as TabsNative from "./tabs-native";
+import * as TabsWeb from "./tabs-web";
 
 export const Root = Platform.select({
   web: TabsWeb.Root,

@@ -1,9 +1,12 @@
-import * as Toggle from '@radix-ui/react-toggle';
-import React from 'react';
-import { Pressable, type GestureResponderEvent } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
-import type { PressableRef, SlottablePressableProps } from '@rn-primitives/internal-types';
-import type { ToggleRootProps } from './types';
+import * as Toggle from "@radix-ui/react-toggle";
+import React from "react";
+import { Pressable, type GestureResponderEvent } from "react-native";
+import * as Slot from "@rn-primitives/slot";
+import type {
+  PressableRef,
+  SlottablePressableProps,
+} from "@rn-primitives/internal-types";
+import type { ToggleRootProps } from "./types";
 
 const Root = React.forwardRef<
   PressableRef,
@@ -18,7 +21,7 @@ const Root = React.forwardRef<
       onPress: onPressProp,
       ...props
     },
-    ref
+    ref,
   ) => {
     function onPress(ev: GestureResponderEvent) {
       onPressProp?.(ev);
@@ -37,14 +40,14 @@ const Root = React.forwardRef<
           ref={ref}
           onPress={onPress}
           disabled={disabled}
-          role='button'
+          role="button"
           {...props}
         />
       </Toggle.Root>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootWebToggle';
+Root.displayName = "RootWebToggle";
 
 export { Root };

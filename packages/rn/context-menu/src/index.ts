@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import * as ContextMenuNative from './context-menu-native';
-import * as ContextMenuWeb from './context-menu-web';
+import { Platform } from "react-native";
+import * as ContextMenuNative from "./context-menu-native";
+import * as ContextMenuWeb from "./context-menu-web";
 
 export const Root = Platform.select({
   web: ContextMenuWeb.Root,

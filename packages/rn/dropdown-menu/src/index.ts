@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import * as DropdownMenuNative from './dropdown-menu-native';
-import * as DropdownWeb from './dropdown-menu-web';
+import { Platform } from "react-native";
+import * as DropdownMenuNative from "./dropdown-menu-native";
+import * as DropdownWeb from "./dropdown-menu-web";
 
 export const Root = Platform.select({
   web: DropdownWeb.Root,

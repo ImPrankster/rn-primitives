@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import * as AlertDialogWeb from './alert-dialog-web';
-import * as AlertDialogNative from './alert-dialog-native';
+import { Platform } from "react-native";
+import * as AlertDialogWeb from "./alert-dialog-web";
+import * as AlertDialogNative from "./alert-dialog-native";
 
 export const Root = Platform.select({
   web: AlertDialogWeb.Root,

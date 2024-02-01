@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import * as AccordionWeb from './accordion-web';
-import * as AccordionNative from './accordion-native';
+import { Platform } from "react-native";
+import * as AccordionWeb from "./accordion-web";
+import * as AccordionNative from "./accordion-native";
 
 export const Root = Platform.select({
   web: AccordionWeb.Root,

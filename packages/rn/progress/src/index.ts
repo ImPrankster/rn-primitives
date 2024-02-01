@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import * as ProgressNative from './progress-native';
-import * as ProgressWeb from './progress-web';
+import { Platform } from "react-native";
+import * as ProgressNative from "./progress-native";
+import * as ProgressWeb from "./progress-web";
 
 export const Root = Platform.select({
   web: ProgressWeb.Root,

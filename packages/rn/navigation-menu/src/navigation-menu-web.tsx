@@ -1,22 +1,22 @@
-import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import React from 'react';
-import { GestureResponderEvent, Pressable, View } from 'react-native';
-import { useAugmentedRef } from '@rn-primitives/use-augmented-ref';
-import * as Slot from '@rn-primitives/slot';
+import * as NavigationMenu from "@radix-ui/react-navigation-menu";
+import React from "react";
+import { GestureResponderEvent, Pressable, View } from "react-native";
+import { useAugmentedRef } from "@rn-primitives/use-augmented-ref";
+import * as Slot from "@rn-primitives/slot";
 import type {
   PositionedContentProps,
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '@rn-primitives/internal-types';
+} from "@rn-primitives/internal-types";
 import type {
   NavigationMenuItemProps,
   NavigationMenuLinkProps,
   NavigationMenuPortalProps,
   NavigationMenuRootProps,
-} from './types';
-import { EmptyGestureResponderEvent } from '@rn-primitives/empty-gesture-recognizer-event';
+} from "./types";
+import { EmptyGestureResponderEvent } from "@rn-primitives/empty-gesture-recognizer-event";
 
 const NavigationMenuContext =
   React.createContext<NavigationMenuRootProps | null>(null);
@@ -36,7 +36,7 @@ const Root = React.forwardRef<
       orientation,
       ...viewProps
     },
-    ref
+    ref,
   ) => {
     const Component = asChild ? Slot.View : View;
     return (
@@ -55,16 +55,16 @@ const Root = React.forwardRef<
         </NavigationMenu.Root>
       </NavigationMenuContext.Provider>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootWebNavigationMenu';
+Root.displayName = "RootWebNavigationMenu";
 
 function useNavigationMenuContext() {
   const context = React.useContext(NavigationMenuContext);
   if (!context) {
     throw new Error(
-      'NavigationMenu compound components cannot be rendered outside the NavigationMenu component'
+      "NavigationMenu compound components cannot be rendered outside the NavigationMenu component",
     );
   }
   return context;
@@ -89,10 +89,10 @@ const List = React.forwardRef<ViewRef, SlottableViewProps>(
         <Component ref={ref} {...viewProps} />
       </NavigationMenu.List>
     );
-  }
+  },
 );
 
-List.displayName = 'ListWebNavigationMenu';
+List.displayName = "ListWebNavigationMenu";
 
 const ItemContext = React.createContext<NavigationMenuItemProps | null>(null);
 
@@ -110,13 +110,13 @@ const Item = React.forwardRef<
   );
 });
 
-Item.displayName = 'ItemWebNavigationMenu';
+Item.displayName = "ItemWebNavigationMenu";
 
 function useItemContext() {
   const context = React.useContext(ItemContext);
   if (!context) {
     throw new Error(
-      'NavigationMenu compound components cannot be rendered outside the NavigationMenu component'
+      "NavigationMenu compound components cannot be rendered outside the NavigationMenu component",
     );
   }
   return context;
@@ -131,21 +131,21 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       onKeyDown: onKeyDownProp,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { value: rootValue, onValueChange } = useNavigationMenuContext();
     const { value } = useItemContext();
     function onKeyDown(ev: React.KeyboardEvent) {
       onKeyDownProp?.(ev);
-      if (ev.key === ' ') {
+      if (ev.key === " ") {
         onPressProp?.(EmptyGestureResponderEvent);
-        onValueChange(value === rootValue ? '' : value);
+        onValueChange(value === rootValue ? "" : value);
       }
     }
 
     function onPress(ev: GestureResponderEvent) {
       onPressProp?.(ev);
-      onValueChange(value === rootValue ? '' : value);
+      onValueChange(value === rootValue ? "" : value);
     }
 
     const Component = asChild ? Slot.Pressable : Pressable;
@@ -160,10 +160,10 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         />
       </NavigationMenu.Trigger>
     );
-  }
+  },
 );
 
-Trigger.displayName = 'TriggerWebNavigationMenu';
+Trigger.displayName = "TriggerWebNavigationMenu";
 
 function Portal({ children }: NavigationMenuPortalProps) {
   return <>{children}</>;
@@ -191,7 +191,7 @@ const Content = React.forwardRef<
       onInteractOutside,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Component = asChild ? Slot.View : View;
     return (
@@ -205,10 +205,10 @@ const Content = React.forwardRef<
         <Component ref={ref} {...props} />
       </NavigationMenu.Content>
     );
-  }
+  },
 );
 
-Content.displayName = 'ContentWebNavigationMenu';
+Content.displayName = "ContentWebNavigationMenu";
 
 const Link = React.forwardRef<
   PressableRef,
@@ -222,20 +222,20 @@ const Link = React.forwardRef<
       onKeyDown: onKeyDownProp,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { onValueChange } = useNavigationMenuContext();
     function onKeyDown(ev: React.KeyboardEvent) {
       onKeyDownProp?.(ev);
-      if (ev.key === 'Enter' || ev.key === ' ') {
+      if (ev.key === "Enter" || ev.key === " ") {
         onPressProp?.(EmptyGestureResponderEvent);
-        onValueChange('');
+        onValueChange("");
       }
     }
 
     function onPress(ev: GestureResponderEvent) {
       onPressProp?.(ev);
-      onValueChange('');
+      onValueChange("");
     }
 
     const Component = asChild ? Slot.Pressable : Pressable;
@@ -243,7 +243,7 @@ const Link = React.forwardRef<
       <NavigationMenu.Link active={active} asChild>
         <Component
           ref={ref}
-          role='link'
+          role="link"
           // @ts-expect-error web only
           onKeyDown={onKeyDown}
           onPress={onPress}
@@ -251,14 +251,14 @@ const Link = React.forwardRef<
         />
       </NavigationMenu.Link>
     );
-  }
+  },
 );
 
-Link.displayName = 'LinkWebNavigationMenu';
+Link.displayName = "LinkWebNavigationMenu";
 
 const Viewport = React.forwardRef<
   ViewRef,
-  Omit<React.ComponentPropsWithoutRef<typeof View>, 'children'>
+  Omit<React.ComponentPropsWithoutRef<typeof View>, "children">
 >((props, ref) => {
   return (
     <Slot.View ref={ref} {...props}>
@@ -267,7 +267,7 @@ const Viewport = React.forwardRef<
   );
 });
 
-Viewport.displayName = 'ViewportWebNavigationMenu';
+Viewport.displayName = "ViewportWebNavigationMenu";
 
 const Indicator = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
@@ -277,10 +277,10 @@ const Indicator = React.forwardRef<ViewRef, SlottableViewProps>(
         <Component ref={ref} {...props} />
       </NavigationMenu.Indicator>
     );
-  }
+  },
 );
 
-Indicator.displayName = 'IndicatorWebNavigationMenu';
+Indicator.displayName = "IndicatorWebNavigationMenu";
 
 export {
   Content,

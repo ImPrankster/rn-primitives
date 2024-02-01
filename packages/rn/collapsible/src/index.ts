@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import * as CollapsibleWeb from './collapsible-web';
-import * as CollapsibleNative from './collapsible-native';
+import { Platform } from "react-native";
+import * as CollapsibleWeb from "./collapsible-web";
+import * as CollapsibleNative from "./collapsible-native";
 
 export const Root = Platform.select({
   web: CollapsibleWeb.Root,

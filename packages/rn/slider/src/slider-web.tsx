@@ -1,9 +1,12 @@
-import * as Slider from '@radix-ui/react-slider';
-import React from 'react';
-import { View } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
-import type { SlottableViewProps, ViewRef } from '@rn-primitives/internal-types';
-import type { SliderRootProps } from './types';
+import * as Slider from "@radix-ui/react-slider";
+import React from "react";
+import { View } from "react-native";
+import * as Slot from "@rn-primitives/slot";
+import type {
+  SlottableViewProps,
+  ViewRef,
+} from "@rn-primitives/internal-types";
+import type { SliderRootProps } from "./types";
 
 const Root = React.forwardRef<ViewRef, SlottableViewProps & SliderRootProps>(
   (
@@ -19,7 +22,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SliderRootProps>(
       onValueChange,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Component = asChild ? Slot.View : View;
     return (
@@ -37,10 +40,10 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & SliderRootProps>(
         <Component ref={ref} {...props} />
       </Slider.Root>
     );
-  }
+  },
 );
 
-Root.displayName = 'RootWebSlider';
+Root.displayName = "RootWebSlider";
 
 const Track = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
@@ -50,10 +53,10 @@ const Track = React.forwardRef<ViewRef, SlottableViewProps>(
         <Component ref={ref} {...props} />
       </Slider.Track>
     );
-  }
+  },
 );
 
-Track.displayName = 'TrackWebSlider';
+Track.displayName = "TrackWebSlider";
 
 const Range = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
@@ -63,10 +66,10 @@ const Range = React.forwardRef<ViewRef, SlottableViewProps>(
         <Component ref={ref} {...props} />
       </Slider.Range>
     );
-  }
+  },
 );
 
-Range.displayName = 'RangeWebSlider';
+Range.displayName = "RangeWebSlider";
 
 const Thumb = React.forwardRef<ViewRef, SlottableViewProps>(
   ({ asChild, ...props }, ref) => {
@@ -76,9 +79,9 @@ const Thumb = React.forwardRef<ViewRef, SlottableViewProps>(
         <Component ref={ref} {...props} />
       </Slider.Thumb>
     );
-  }
+  },
 );
 
-Thumb.displayName = 'ThumbWebSlider';
+Thumb.displayName = "ThumbWebSlider";
 
 export { Range, Root, Thumb, Track };

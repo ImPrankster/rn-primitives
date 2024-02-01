@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import * as HoverCardNative from './hover-card-native';
-import * as HoverCardWeb from './hover-card-web';
+import { Platform } from "react-native";
+import * as HoverCardNative from "./hover-card-native";
+import * as HoverCardWeb from "./hover-card-web";
 
 export const Root = Platform.select({
   web: HoverCardWeb.Root,

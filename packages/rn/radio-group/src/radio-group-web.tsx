@@ -1,15 +1,15 @@
-import * as RadioGroup from '@radix-ui/react-radio-group';
-import React from 'react';
-import { GestureResponderEvent, Pressable, View } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
+import * as RadioGroup from "@radix-ui/react-radio-group";
+import React from "react";
+import { GestureResponderEvent, Pressable, View } from "react-native";
+import * as Slot from "@rn-primitives/slot";
 import type {
   ForceMountable,
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '@rn-primitives/internal-types';
-import type { RadioGroupItemProps, RadioGroupRootProps } from './types';
+} from "@rn-primitives/internal-types";
+import type { RadioGroupItemProps, RadioGroupRootProps } from "./types";
 const RadioGroupContext = React.createContext<RadioGroupRootProps | null>(null);
 const Root = React.forwardRef<
   ViewRef,
@@ -36,12 +36,12 @@ const Root = React.forwardRef<
   );
 });
 
-Root.displayName = 'RootRadioGroup';
+Root.displayName = "RootRadioGroup";
 function useRadioGroupContext() {
   const context = React.useContext(RadioGroupContext);
   if (!context) {
     throw new Error(
-      'RadioGroup compound components cannot be rendered outside the RadioGroup component'
+      "RadioGroup compound components cannot be rendered outside the RadioGroup component",
     );
   }
   return context;
@@ -67,7 +67,7 @@ const Item = React.forwardRef<
   );
 });
 
-Item.displayName = 'ItemRadioGroup';
+Item.displayName = "ItemRadioGroup";
 
 const Indicator = React.forwardRef<
   ViewRef,
@@ -81,6 +81,6 @@ const Indicator = React.forwardRef<
   );
 });
 
-Indicator.displayName = 'IndicatorRadioGroup';
+Indicator.displayName = "IndicatorRadioGroup";
 
 export { Indicator, Item, Root };

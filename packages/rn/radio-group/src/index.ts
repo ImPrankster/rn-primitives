@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import * as RadioGroupNative from './radio-group-native';
-import * as RadioGroupWeb from './radio-group-web';
+import { Platform } from "react-native";
+import * as RadioGroupNative from "./radio-group-native";
+import * as RadioGroupWeb from "./radio-group-web";
 
 export const Root = Platform.select({
   web: RadioGroupWeb.Root,

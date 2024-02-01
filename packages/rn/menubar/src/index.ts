@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import * as MenubarWeb from './menubar-web';
-import * as MenubarNative from './menubar-native';
+import { Platform } from "react-native";
+import * as MenubarWeb from "./menubar-web";
+import * as MenubarNative from "./menubar-native";
 
 export const Root = Platform.select({
   web: MenubarWeb.Root,
