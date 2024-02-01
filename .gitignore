@@ -18,6 +18,9 @@ dist/
 # Metro
 .metro-health-check*
 
+# Turbo Repo
+.turbo
+
 # debug
 npm-debug.*
 yarn-debug.*
